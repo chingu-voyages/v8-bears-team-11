@@ -1,0 +1,100 @@
+$primary-color: #03A9F4
+$secundary-color: #586879
+$font-title: 'Nunito', sans-serif
+$background-nav: linear-gradient(90deg,#00c4cc,#7d2ae8)
+/*
+  Se puede simplicar con mixins
+  */
+
+button
+  border: none
+  cursor: pointer
+  display: block
+  background: transparent
+
+
+.btn__primary
+  font-size: 17px
+  background: #c0d13e
+  color: white
+  padding: 12px 0px
+  width: 270px
+  border-radius: 5px
+  margin: 2em auto
+  &:focus
+    outline: none
+  &:active
+    padding: 12px 1px
+
+.btn__danger
+  font-size: 17px
+  background: #d84044
+  color: white
+  padding: 12px 0px
+  border-radius: 5px
+  margin: 2em auto
+  &:focus
+    outline: none
+  &:active
+    padding: 10px 1px
+
+.btn__table
+  font-size: 13px
+  color: #03A9F4
+  margin: auto
+  border-radius: 5px
+  border: 1px solid #03A9F4
+  &:focus
+    outline: none
+  &:active
+    color: #fff
+    background-color: $primary-color
+    border-color: $primary-color
+    box-shadow: 0 0 0 0.2rem rgba(23,162,184,.5)
+
+
+.btn__primary__fat
+  font-size: 17px
+  background: #c0d13e
+  color: white
+  padding: 30px 0
+  width: 100%
+  border-radius: 5px
+  margin: 2em auto
+  &:focus
+    outline: none
+  &:active
+    font-size: 18px
+
+.btn__pb
+  font-size: 17px
+  background: white
+  color: #32bae9
+  padding: 12px 0px
+  width: 250px
+  border-radius: 5px
+  margin: 10px auto
+  border: 1px solid #32bae9
+  &:focus
+    outline: none
+  &:active
+    padding: 12px 1px
+
+.btn__modal
+  color: white
+  font-weight: bold
+  padding: 12px
+  margin: 0 10px
+  border-radius: 5px
+  &:focus
+    outline: none
+  &:active
+    padding: 12px 13px
+
+.btn__fat__blue
+  font-size: 17px
+  background: $background-nav
+  color: white
+  border-radius: 5px
+  &:focus
+    outline: none
