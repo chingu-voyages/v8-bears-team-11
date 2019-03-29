@@ -1,7 +1,7 @@
 'use strict';
 
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
+
+const User = require('../models/user');
 
 export async function getUsers(req, res) {
   try {
