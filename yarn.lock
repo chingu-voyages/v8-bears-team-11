@@ -725,10 +725,15 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-bson@^1.1.0, bson@~1.1.0:
+bson@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.0.tgz#bee57d1fb6a87713471af4e32bcae36de814b5b0"
   integrity sha512-9Aeai9TacfNtWXOYarkFJRW2CWo+dRon+fuLZYJmvLV3+MiUp0bEI6IAZfXEIg7/Pl/7IWlLaDnhzTsD81etQA==
+
+bson@~1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.1.tgz#4330f5e99104c4e751e7351859e2d408279f2f13"
+  integrity sha512-jCGVYLoYMHDkOsbwJZBCqwMHyH4c+wzgI9hG7Z6SZJRXWr+x58pdIbm2i9a/jFGCkRJqRUr8eoI7lDWa0hTkxg==
 
 buffer-equal-constant-time@1.0.1:
   version "1.0.1"
@@ -2216,10 +2221,10 @@ mongoose-unique-validator@^2.0.2:
     lodash.foreach "^4.1.0"
     lodash.get "^4.0.2"
 
-mongoose@^5.4.16:
-  version "5.4.16"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.4.16.tgz#2043f1e311c69584c7723f851eb01c75d9879076"
-  integrity sha512-1lGuXBBxs8KloHMe0mZGpC8L+l+flRFh3IoNf2lRmSaSMrpgEjrBHm6Aypfe2s+Y5xO0h7gua3TAZUplWpMxSw==
+mongoose@^5.4.20:
+  version "5.4.20"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.4.20.tgz#8bc3720d082f07b535d2693f07ea3c2a7dc918a3"
+  integrity sha512-CyybxMQbCaq6jvbroamS5mPfFbxTOLLpdpkQrk1cj7Az1TX+mBbcCVhz+7XElfTMIOb58ah9O+EXmZJsLPD3Lg==
   dependencies:
     async "2.6.1"
     bson "~1.1.0"
