@@ -1,0 +1,39 @@
+{
+  "name": "mongo",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index --exec babel-node",
+    "clean": "rm -rf dist",
+    "babel": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./npm-debug.log,./CHANGELOG.md,./README.md,./yarn.lock,./package.json.lock, --copy-files",
+    "build": "npm run clean && npm run babel && node ./dist"
+  },
+  "author": "Mario",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-promise-router": "^3.0.3",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.5.0",
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.20",
+    "mongoose-unique-validator": "^2.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.0.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015-node5": "^1.2.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "moca": "^0.4.3",
+    "nodemon": "^1.18.10",
+    "rimraf": "^2.6.3"
+  }
+}

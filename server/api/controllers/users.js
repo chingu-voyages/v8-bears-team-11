@@ -21,7 +21,6 @@ export async function getUsers(req, res) {
     });
   } catch(e){
     console.log(e);
-    
     return res.status(500).json({error: 'There is a problem in the server'});
   }
 }
