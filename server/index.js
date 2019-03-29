@@ -1,18 +1,20 @@
-// const express = require('express');
+'use strict';
 
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import session from 'express-session';
+import apiRoutes from './api/routes/routes';
 import cors from 'cors';
+import session from 'express-session';
+
+const app = express();
 
 const port = process.env.PORT || 4000;
 const production = process.env.NODE_ENV === 'production';
 const dbStatus = production ? 'prod' : 'env';
-const apiRoutes = require('./api/routes/routes');
-const dbURI = `mongodb://localhost:27017/hospitalDB-${dbStatus}`;
+const dbURI = `mongodb://localhost/hospitalDB-${dbStatus}`;
 
-const app = express();
+
 
 app.use(cors());
 
@@ -29,37 +31,31 @@ app.use(bodyParser.json());
 
 // Conexión a la base de datos
 
-if(production){
-  mongoose.connect(dbURI, { useNewUrlParser: true });
-}
+const db = mongoose.connection;
 
-if(!production) {
-  mongoose.connect(dbURI, {
-    useNewUrlParser: true,
-    autoIndex: false,
-    reconnectInterval: 500,
-    poolSize: 10,
-    bufferMaxEntries: 0
-  });
+mongoose.connect(dbURI, {
+  useNewUrlParser: true,
+  autoIndex: false,
+  reconnectInterval: 500,
+  poolSize: 10,
+  bufferMaxEntries: 0
+});
 
-  mongoose.connection.on('error', (err) => console.log(err.message))
-    .on('close', (err) => console.log('Mongoose connection error'))
-    .on('connected', () => {
-      console.log('Mongoose connected to '+ dbURI)
-      console.log('Base de datos: \x1b[32m%s\x1b[0m', 'online');
-  });
-}
+db.on('error', (err) => console.error.bind(console, 'connection error:'));
+db.on('close', (err) => console.log('Mongoose connection error'));
+db.on('open', () => {
+    console.log( `Mongoose connected to ${dbURI}`)
+    console.log('Base de datos: \x1b[32m%s\x1b[0m', 'online');
+});
 
 app.use(session({
-  secret: 'conduit',
+  secret: 'work hard',
   cookie: {
     maxAge: 60000
   },
-  resave: false,
+  resave: true,
   saveUninitialized: false
 }));
-
-
 
 app.use('/api/v1',apiRoutes);
 
