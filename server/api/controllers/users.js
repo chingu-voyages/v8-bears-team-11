@@ -59,9 +59,9 @@ export async function createUser(req, res) {
 export async function updateUser(req, res) {
   try{
     const { name, email, role } = req.body;
-    const { id } = req.params;
+    const { userId } = req.params;
 
-    const user = await User.findById( id )
+    const user = await User.findById( userId )
 
     if (!user) {
       return res.status(400).json({

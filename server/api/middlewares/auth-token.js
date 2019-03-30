@@ -8,8 +8,9 @@ export async function authToken(req, res ,next) {
     try{
 
         const token = req.query.token;
-
+        console.log(req.query);
         verify(token, SEED, (err, decoded) => {
+
 
             if (err) {
                 return res.status(401).json({
