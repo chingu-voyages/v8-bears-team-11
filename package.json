@@ -21,7 +21,8 @@
   },
   "homepage": "https:///github.com/chingu-voyages/v8-bears-team-11.git#readme",
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.0",
+    "material-ui": "^0.20.2"
   },
   "devDependencies": {}
 }
