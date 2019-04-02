@@ -7,34 +7,28 @@ import {
   StaticRouter
 } from "react-router-dom";
 
-import routes from '../routes/routes';
+import Layout from "../app/Ui-Private/UiPrivate";
 
 export default ({ server, location, context }) => {
-    const routesMap = routes.map((route, i) => <Route key={i} {...route} />);
+  // Client Router
+  let router = (
+    <Router>
+      <Switch>
+        <Route path="/" component={Layout} />
+      </Switch>
+    </Router>
+  );
 
-    // Client Router
-    let router = (
-        <Router>
-            <Switch>
-                {routesMap}
-            </Switch>
-        </Router>
+  // Server Router
+  if (server) {
+    router = (
+      <StaticRouter location={location} context={context}>
+        <Switch>
+          <Route path="/" component={Layout} />
+        </Switch>
+      </StaticRouter>
     );
+  }
 
-    // Server Router
-    if (server) {
-        router = (
-            <StaticRouter location={location} context={context}>
-                    <Switch>
-                        {routesMap}
-                    </Switch>
-             </StaticRouter>            
-        );
-    }
-
-    return (
-        <div>
-            {router}
-        </div>        
-    );
+  return <div>{router}</div>;
 };
