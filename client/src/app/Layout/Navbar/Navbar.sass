@@ -1,13 +1,13 @@
 $background-nav: linear-gradient(90deg,#00c4cc,#7d2ae8)
 $color-text: white
 
-
 .Navbar
   background: $background-nav
-  position: fixed
+  position: absolute
   left: 0
   right: 0
   z-index: 10000
+  display: flex
 .nav__bar
   display: flex
   justify-content: space-between
@@ -32,17 +32,3 @@ $color-text: white
       list-style: none
       display: flex
       padding: 0
-
-.nav__data
-  font-size: 15px
-  text-align: right
-  color: white
-  ul
-    padding: 0 10px 0 0
-    li
-      display: block
-
-.close__session
-  a
-    color: white
-    text-decoration: underline

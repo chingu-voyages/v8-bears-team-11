@@ -7,7 +7,7 @@ import {
   StaticRouter
 } from "react-router-dom";
 
-import Layout from "../app/Ui-Private/UiPrivate";
+import Layout from "../app/Layout/Layout";
 
 export default ({ server, location, context }) => {
   // Client Router
