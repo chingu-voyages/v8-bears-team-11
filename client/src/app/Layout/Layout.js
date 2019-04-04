@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import { Navbar } from "./Navbar/Navbar";
+import Navbar from "./Navbar/Navbar";
+import Sidebar from "./Sidebar/Sidebar";
 import LayoutRouter from "./LayoutRouter";
 /* Styles */
 import "./Layout.sass";
@@ -10,7 +11,8 @@ export default class Layout extends Component {
     return (
       <div className="Layout">
         <Navbar />
-        <div className="content_main">
+        <Sidebar />
+        <div className="Main">
           <LayoutRouter />
         </div>
       </div>

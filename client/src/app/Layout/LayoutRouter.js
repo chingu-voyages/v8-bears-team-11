@@ -9,6 +9,6 @@ export default class LayoutRouter extends Component {
       <Route key={i} exact {...route} />
     ));
 
-    return <div className="LayoutRouter wrapper">{routesMap}</div>;
+    return <div>{routesMap}</div>;
   }
 }
