@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./Home.sass";
 
-export default class Books extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -14,10 +14,10 @@ export default class Books extends Component {
 
   render() {
     return (
-      <div className="Books">
+      <div className="home">
         <h1>Home</h1>
         <Link to="/db">
-          <h1 className="title-brand">To Dashboard</h1>
+          <h1>To Dashboard</h1>
         </Link>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem

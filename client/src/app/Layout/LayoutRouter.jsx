@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 
 import routes from "./Routes/LayoutRoutes";
 
@@ -9,6 +9,11 @@ export default class LayoutRouter extends Component {
       <Route key={i} exact {...route} />
     ));
 
-    return <div>{routesMap}</div>;
+    return (
+      <Switch>
+        {routesMap}
+        <Route path="*" render={() => <Redirect to="/" />} />
+      </Switch>
+    );
   }
 }

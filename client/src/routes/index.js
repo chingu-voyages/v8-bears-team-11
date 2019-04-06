@@ -4,10 +4,11 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  StaticRouter
+  StaticRouter,
+  Redirect
 } from "react-router-dom";
 
-import Layout from "../app/Layout/Layout";
+import Layout from "../app/Layout/Layout.jsx";
 
 export default ({ server, location, context }) => {
   // Client Router
@@ -15,6 +16,7 @@ export default ({ server, location, context }) => {
     <Router>
       <Switch>
         <Route path="/" component={Layout} />
+        <Route path="*" render={() => <Redirect to="/" />} />
       </Switch>
     </Router>
   );
@@ -25,6 +27,7 @@ export default ({ server, location, context }) => {
       <StaticRouter location={location} context={context}>
         <Switch>
           <Route path="/" component={Layout} />
+          <Route path="*" render={() => <Redirect to="/" />} />
         </Switch>
       </StaticRouter>
     );

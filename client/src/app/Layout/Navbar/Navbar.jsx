@@ -6,11 +6,12 @@ import "./Navbar.sass";
 export class Navbar extends Component {
   render() {
     return (
-      <div className="Navbar">
-        <div className="wrapper nav__bar">
-          <div className="brand-logo">
-            <Link to="/">Test</Link>
-          </div>
+      <div className="navbar">
+        <i className="material-icons" onClick={this.props.onChange}>
+          menu
+        </i>
+        <div className="brand-logo">
+          <Link to="/">Test</Link>
         </div>
       </div>
     );
