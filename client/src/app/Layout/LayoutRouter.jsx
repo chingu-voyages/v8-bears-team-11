@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 
-import routes from "./Routes/LayoutRoutes";
+import routes from "./routes.js";
 
 export default class LayoutRouter extends Component {
   render() {

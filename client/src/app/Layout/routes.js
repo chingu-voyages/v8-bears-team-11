@@ -1,5 +1,5 @@
-import Home from "../../Home/Home";
-import Dashboard from "../../Dashboard/Dashboard";
+import Home from "../Home/Home";
+import Dashboard from "../Dashboard/Dashboard";
 
 const routes = [
   {

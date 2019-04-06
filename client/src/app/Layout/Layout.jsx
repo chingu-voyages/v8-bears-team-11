@@ -26,15 +26,14 @@ export default class Layout extends Component {
   render() {
     let sidebarClass = ["sidebar"];
     let mainClass = ["main"];
+
     if (this.state.sidebarPos === 1) {
       sidebarClass.push("sidebarMin");
       mainClass.push("mainMin");
-    } else if (this.state.sidebarPos === 2) {
+    }
+    if (this.state.sidebarPos === 2) {
       sidebarClass.push("sidebarOpen");
       mainClass.push("mainOpen");
-    } else {
-      sidebarClass = ["sidebar"];
-      mainClass = ["main"];
     }
 
     return (
