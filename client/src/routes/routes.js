@@ -1,5 +1,6 @@
 import Home from "../app/Home/Home";
-import Login from "../app/Login/Login";
+import Dashboard from "../app/Dashboard/Dashboard";
+import Requerimientos from "../app/Requerimientos/Requerimientos";
 
 const routes = [
   {
@@ -7,8 +8,12 @@ const routes = [
     component: Home
   },
   {
-    path: "/login",
-    component: Login
+    path: "/db",
+    component: Dashboard
+  },
+  {
+    path: "/req",
+    component: Requerimientos
   }
 ];
 

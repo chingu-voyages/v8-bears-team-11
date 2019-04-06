@@ -32,7 +32,7 @@ export class Sidebar extends Component {
           <i className="material-icons">settings</i>
           <span>Configuración</span>
         </Link>
-        <Link className="li" to="/">
+        <Link className="li" to="/req">
           <i className="material-icons">assignment</i>
           <span>Requerimientos</span>
         </Link>
