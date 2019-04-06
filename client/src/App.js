@@ -6,7 +6,6 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 // Import Components
 import Layout from "./app/Layout/Layout";
-import Login from "./app/Login/Login";
 import variables from "./main.scss";
 
 class App extends Component {
