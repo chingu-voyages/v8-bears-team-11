@@ -12,25 +12,29 @@ export class Sidebar extends Component {
           <span>Dashboard</span>
         </Link>
         <Link className="li" to="/">
-          <i className="material-icons">people</i>
-          <span>Clients</span>
-        </Link>
-        <Link className="li" to="/sales">
-          <i className="material-icons">show_chart</i>
-          <span>Sales</span>
+          <i className="material-icons">event</i>
+          <span>Agenda</span>
         </Link>
         <Link className="li" to="/">
-          <i className="material-icons">table_chart</i>
-          <span>Others</span>
+          <i className="material-icons">people</i>
+          <span>Pacientes</span>
+        </Link>
+        <Link className="li" to="/sales">
+          <i className="material-icons">description</i>
+          <span>Documentos</span>
+        </Link>
+        <Link className="li" to="/">
+          <i className="material-icons">local_pharmacy</i>
+          <span>Fármacos</span>
         </Link>
         <span className="spacer" />
         <Link className="li" to="/">
           <i className="material-icons">settings</i>
-          <span>Configuration</span>
+          <span>Configuración</span>
         </Link>
         <Link className="li" to="/">
-          <i className="material-icons">settings</i>
-          <span>Configur</span>
+          <i className="material-icons">assignment</i>
+          <span>Requerimientos</span>
         </Link>
       </ul>
     );
