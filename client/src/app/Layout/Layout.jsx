@@ -8,7 +8,7 @@ import "./Layout.sass";
 
 export default class Layout extends Component {
   state = {
-    sidebarPos: 1
+    sidebarPos: 2
   };
 
   handleSidebar = () => {

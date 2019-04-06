@@ -1,8 +1,7 @@
 import React, { Component } from "react";
+import "./Agenda.sass";
 
-import "./Home.sass";
-
-export default class Home extends Component {
+export default class Agenda extends Component {
   constructor(props) {
     super(props);
 
@@ -13,8 +12,8 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div className="home">
-        <h1>Home</h1>
+      <div className="agenda">
+        <h1>Agenda</h1>
       </div>
     );
   }

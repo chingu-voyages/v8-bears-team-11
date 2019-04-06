@@ -1,0 +1,20 @@
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: white;
+  font-family: "Nunito", sans-serif;
+}
+/* Colors for theme */
+$primary: #46d0f7;
+$secondary: #7d2ae8;
+
+:export {
+  primary: $primary;
+  secondary: $secondary;
+}
