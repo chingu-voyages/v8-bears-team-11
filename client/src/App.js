@@ -7,6 +7,8 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 // Import Components
 import Layout from "./app/Layout/Layout";
 import variables from "./main.scss";
+import Login from "./app/Login/Login";
+import Register from "./app/Register/Register";
 
 class App extends Component {
   render() {
@@ -14,7 +16,9 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Switch>
-            <Route path="/" component={Layout} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route component={Layout} />
           </Switch>
         </BrowserRouter>
       </MuiThemeProvider>

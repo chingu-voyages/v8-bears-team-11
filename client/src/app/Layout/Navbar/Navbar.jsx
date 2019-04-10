@@ -18,8 +18,10 @@ export class Navbar extends Component {
         </div>
         <span className="spacer" />
         <div className="user">
-          <p> John Doe </p>
-          <img src={defaultPP} alt="PP" />
+          <Link to="/login">
+            <p> John Doe </p>
+            <img src={defaultPP} alt="PP" />
+          </Link>
         </div>
       </div>
     );
