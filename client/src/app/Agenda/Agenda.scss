@@ -1,0 +1,41 @@
+.agenda {
+  text-align: center;
+  .calendar {
+    width: 80vw;
+    margin: auto auto 5em auto;
+    background-color: white;
+    padding: 2em;
+    border-radius: 10px;
+    .rbc-day-slot .rbc-event-label {
+      display: none;
+    }
+  }
+}
+
+.eventModal {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 10px 30px 30px 30px;
+  border-radius: 10px;
+  width: 40%;
+  .header {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    button {
+      margin: auto;
+    }
+  }
+  .pickers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align-last: center;
+    margin: 1em 0;
+    justify-items: center;
+    .timepicker {
+      width: 8em;
+    }
+    span {
+      color: gray;
+    }
+  }
+}

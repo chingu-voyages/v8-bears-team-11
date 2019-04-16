@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import "./Agenda.sass";
+
+import Calendar from "./Calendar";
+
+import "./Agenda.scss";
 
 export default class Agenda extends Component {
   constructor(props) {
@@ -14,6 +17,9 @@ export default class Agenda extends Component {
     return (
       <div className="agenda">
         <h1>Agenda</h1>
+        <div className="calendar">
+          <Calendar />
+        </div>
       </div>
     );
   }
