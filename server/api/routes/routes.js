@@ -9,6 +9,7 @@ import {
 } from "../controllers/users";
 import {
   getPatients,
+  getOnePatient,
   createPatient,
   updatePatient,
   deletePatient
@@ -25,6 +26,7 @@ router.put("/user/:userId", authToken, updateUser);
 router.delete("/user/:userId", deleteUser);
 //CRUD PATIENTS
 router.get("/patients", getPatients);
+router.get("/patient/:id", getOnePatient);
 router.post("/patient", createPatient);
 router.put("/patient/:id", updatePatient);
 router.delete("/patient/:id", deletePatient);

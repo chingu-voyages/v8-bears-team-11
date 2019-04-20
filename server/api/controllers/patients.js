@@ -21,6 +21,26 @@ export async function getPatients(req, res) {
   }
 }
 
+export async function getOnePatient(req, res) {
+  try {
+    const patient = await Patient.findById(req.params.id);
+    if (!patient) {
+      return res.status(500).json({
+        read: false,
+        mensaje: "Error al leer el paciente"
+      });
+    }
+    res.status(200).json({
+      read: true,
+      paciente: patient
+    });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "There is a problem in the server " + err });
+  }
+}
+
 export async function createPatient(req, res) {
   try {
     const {
