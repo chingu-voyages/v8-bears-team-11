@@ -11,6 +11,8 @@ import {
   IconButton
 } from "@material-ui/core";
 
+import Draggable from "react-draggable";
+
 export default class Event extends React.Component {
   state = {
     title: ""
@@ -67,53 +69,60 @@ export default class Event extends React.Component {
         aria-labelledby="form-dialog-title"
         onRendered={this.mapPropsToState}
       >
-        <div className="eventModal">
-          <div className="header">
-            <h3 id="form-dialog-title"> {this.props.title} </h3>
-            {this.state.delbtn ? (
-              <IconButton onClick={this.handleDelete}>
-                <i className="material-icons">delete</i>
-              </IconButton>
-            ) : (
-              <div />
-            )}
-          </div>
-          <form onSubmit={this.handleSubmit}>
-            <FormControl
-              className="titleinput"
-              margin="normal"
-              required
-              fullWidth
-            >
-              <InputLabel htmlFor="title">Nombre de paciente</InputLabel>
-              <Input
-                id="title"
-                name="title"
-                autoComplete="title"
-                autoFocus
-                onChange={this.handleTitleChange}
-                value={this.state.title}
-              />
-            </FormControl>
-            <div className="pickers">
-              <span>Inicio</span>
-              <span>Fin</span>
-              <TimeInput
-                className="timepicker"
-                value={this.state.start}
-                onChange={date => this.handleTimeChange(date, "start")}
-              />
-              <TimeInput
-                className="timepicker"
-                value={this.state.end}
-                onChange={date => this.handleTimeChange(date, "end")}
-              />
+        <Draggable handle=".header">
+          <div className="eventModal">
+            <div className="header">
+              <h3 id="form-dialog-title"> {this.props.title} </h3>
+              {this.state.delbtn ? (
+                <IconButton onClick={this.handleDelete}>
+                  <i className="material-icons">delete</i>
+                </IconButton>
+              ) : (
+                <div />
+              )}
             </div>
-            <Button type="submit" fullWidth variant="contained" color="primary">
-              {this.props.textbtn}{" "}
-            </Button>
-          </form>
-        </div>
+            <form onSubmit={this.handleSubmit}>
+              <FormControl
+                className="titleinput"
+                margin="normal"
+                required
+                fullWidth
+              >
+                <InputLabel htmlFor="title">Nombre de paciente</InputLabel>
+                <Input
+                  id="title"
+                  name="title"
+                  autoComplete="title"
+                  autoFocus
+                  onChange={this.handleTitleChange}
+                  value={this.state.title}
+                />
+              </FormControl>
+              <div className="pickers">
+                <span>Inicio</span>
+                <span>Fin</span>
+                <TimeInput
+                  className="timepicker"
+                  value={this.state.start}
+                  onChange={date => this.handleTimeChange(date, "start")}
+                />
+                <TimeInput
+                  className="timepicker"
+                  value={this.state.end}
+                  onChange={date => this.handleTimeChange(date, "end")}
+                />
+              </div>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                {this.props.textbtn}{" "}
+              </Button>
+            </form>
+          </div>
+        </Draggable>
       </Modal>
     );
   }
