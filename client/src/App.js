@@ -29,8 +29,11 @@ class App extends Component {
 // Theme config
 const theme = createMuiTheme({
   palette: {
-    primary: { main: variables.primary },
+    primary: { main: variables.primary, contrastText: "#ffffff" },
     secondary: { main: variables.secondary }
+  },
+  typography: {
+    useNextVariants: true
   }
 });
 
