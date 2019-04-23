@@ -4,8 +4,26 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 
 import "./Pacientes.scss";
+import NewPatient from "./newPatient";
 
 export class Pacientes extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openNewPatientModal: false
+    };
+    this.openNewPatientModal = this.openNewPatientModal.bind(this);
+  }
+
+  openNewPatientModal = () => {
+    this.setState({
+      openNewPatientModal: true
+    });
+  };
+
+  closeNewPatientModal = () => {
+    this.setState({ openNewPatientModal: false });
+  };
   render() {
     return (
       <div className="pacientes">
@@ -21,10 +39,21 @@ export class Pacientes extends Component {
             autoFocus
           />
           <span className="spacer" />
-          <Button variant="contained" color="primary">
+          <Button
+            className="newPatientBtn"
+            variant="contained"
+            color="primary"
+            onClick={this.openNewPatientModal}
+          >
             + New patient
           </Button>
         </Paper>
+        {this.state.openNewPatientModal ? (
+          <NewPatient
+            open={this.state.openNewPatientModal}
+            onClose={this.closeNewPatientModal}
+          />
+        ) : null}
       </div>
     );
   }
