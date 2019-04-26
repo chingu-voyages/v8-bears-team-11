@@ -7,7 +7,7 @@ import LayoutRouter from "./LayoutRouter";
 import "./Layout.sass";
 
 function Layout() {
-  const [sidebarPos, setSidebarPos] = useState(2);
+  const [sidebarPos, setSidebarPos] = useState(0);
 
   const handleSidebar = () => {
     if (sidebarPos < 2) {

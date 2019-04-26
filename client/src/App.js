@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // Import Material theme provider
@@ -10,21 +10,19 @@ import variables from "./main.scss";
 import Login from "./app/Login/Login";
 import Register from "./app/Register/Register";
 
-class App extends Component {
-  render() {
-    return (
-      <MuiThemeProvider theme={theme}>
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route component={Layout} />
-          </Switch>
-        </BrowserRouter>
-      </MuiThemeProvider>
-    );
-  }
-}
+const App = () => {
+  return (
+    <MuiThemeProvider theme={theme}>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route component={Layout} />
+        </Switch>
+      </BrowserRouter>
+    </MuiThemeProvider>
+  );
+};
 
 // Theme config
 const theme = createMuiTheme({

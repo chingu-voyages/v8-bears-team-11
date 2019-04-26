@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-export class Farmacos extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Fármacos</h1>
-      </div>
-    );
-  }
-}
+const Farmacos = () => {
+  return (
+    <div>
+      <h1>Fármacos</h1>
+    </div>
+  );
+};
 
 export default Farmacos;

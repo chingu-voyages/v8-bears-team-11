@@ -1,6 +1,6 @@
 import React from "react";
 
-function Requerimientos() {
+const Requerimientos = () => {
   return (
     <div>
       <h1>Requerimientos</h1>
@@ -84,6 +84,6 @@ function Requerimientos() {
       <p />
     </div>
   );
-}
+};
 
 export default Requerimientos;
