@@ -5,18 +5,14 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 // Import Components
-import Layout from "./app/Layout/Layout";
+import Layout from "./components/Layout/Layout";
 import variables from "./main.scss";
-import Login from "./app/Login/Login";
-import Register from "./app/Register/Register";
 
 const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
           <Route component={Layout} />
         </Switch>
       </BrowserRouter>
