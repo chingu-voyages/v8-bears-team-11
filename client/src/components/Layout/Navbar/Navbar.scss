@@ -1,0 +1,61 @@
+.navbar {
+  background: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 10000;
+  display: flex;
+  i {
+    margin: auto 0 auto 12px;
+    padding: 10px;
+    transition: transform 1s;
+    color: #46d0f7;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 26px;
+      transform: rotate(360deg);
+    }
+  }
+  .brand-logo {
+    margin-left: 15px;
+    a {
+      text-decoration: none;
+      h3 {
+        background: -webkit-linear-gradient(45deg, #46d0f7, #7d2ae8);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+      }
+    }
+  }
+  .spacer {
+    flex: 1 1 auto;
+  }
+  .user {
+    margin: auto;
+    margin-right: 1em;
+    cursor: pointer;
+    display: flex;
+    p {
+      padding-right: 1em;
+      font-size: 0.8em;
+      color: #7d2ae8;
+      font-weight: bold;
+      transition: all 0.5s;
+    }
+    img {
+      width: 2em;
+      height: 2em;
+      margin: auto;
+      transition: transform 0.5s;
+    }
+    &:hover {
+      p {
+        transform: translateX(-10px);
+      }
+      img {
+        transform: scale(1.2, 1.2);
+      }
+    }
+  }
+}

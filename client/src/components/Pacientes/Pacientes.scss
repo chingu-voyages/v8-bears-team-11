@@ -1,0 +1,55 @@
+.pacientes {
+  .superior {
+    text-align: center;
+    h1 {
+      margin: 0;
+    }
+  }
+  .paperSearch {
+    padding: 10px 1em;
+    margin-top: 2em;
+    display: flex;
+    .searchInput {
+      input {
+        width: 10em;
+        transition: width 0.5s ease-in-out;
+      }
+      input:focus {
+        width: 20em;
+      }
+    }
+    .spacer {
+      flex: 1 1 auto;
+    }
+    .newPatientBtn {
+      padding: 0 2.5em;
+    }
+  }
+}
+.newPatientModal {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 10px 30px 30px 30px;
+  border-radius: 10px;
+  width: 40%;
+  .header {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    button {
+      margin: auto;
+    }
+  }
+  .pickers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align-last: center;
+    margin: 1em 0;
+    justify-items: center;
+    .timepicker {
+      width: 8em;
+    }
+    span {
+      color: gray;
+    }
+  }
+}

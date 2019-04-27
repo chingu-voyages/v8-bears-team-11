@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "firebase": "^5.10.1",
     "material-ui-time-picker": "^1.1.0",
     "moment": "^2.24.0",
     "node-sass": "^4.10.0",

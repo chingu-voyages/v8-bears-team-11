@@ -1,9 +1,10 @@
-import Agenda from "../app/Agenda/Agenda";
-import Dashboard from "../app/Dashboard/Dashboard";
-import Requerimientos from "../app/Requerimientos/Requerimientos";
-import Pacientes from "../app/Pacientes/Pacientes";
-import Documentos from "../app/Documentos/Documentos";
-import Farmacos from "../app/Farmacos/Farmacos";
+import Agenda from "../components/Agenda/Agenda";
+import Dashboard from "../components/Dashboard/Dashboard";
+import Requerimientos from "../components/Requerimientos/Requerimientos";
+import Pacientes from "../components/Pacientes/Pacientes";
+import Documentos from "../components/Documentos/Documentos";
+import Farmacos from "../components/Farmacos/Farmacos";
+import PatientProfile from "../components/Pacientes/PatientProfile";
 
 const routes = [
   {
@@ -15,8 +16,12 @@ const routes = [
     component: Agenda
   },
   {
-    path: "/pacientes",
+    path: "/patients",
     component: Pacientes
+  },
+  {
+    path: "/patient/:uid",
+    component: PatientProfile
   },
   {
     path: "/documentos",
