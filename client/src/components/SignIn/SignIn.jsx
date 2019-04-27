@@ -51,8 +51,15 @@ const SignIn = () => {
               onChange={e => setEmail(e.target.value)}
             />
           </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
+          <FormControl
+            className="passwordInput"
+            margin="normal"
+            required
+            fullWidth
+          >
+            <InputLabel className="passLabel" htmlFor="password">
+              Password
+            </InputLabel>
             <Input
               name="password"
               type="password"
@@ -70,6 +77,9 @@ const SignIn = () => {
           </Link>
         </form>
       </Card>
+      <p>
+        <strong> v8-bears-team-11</strong>
+      </p>
     </div>
   );
 };
