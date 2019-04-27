@@ -4,7 +4,7 @@ import Navbar from "./Navbar/Navbar";
 import Sidebar from "./Sidebar/Sidebar";
 import LayoutRouter from "./LayoutRouter";
 /* Styles */
-import "./Layout.sass";
+import "./Layout.scss";
 
 function Layout() {
   const [sidebarPos, setSidebarPos] = useState(1);

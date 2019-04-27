@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 
-import "./Dashboard.sass";
+import "./Dashboard.scss";
 
 const Dashboard = () => {
   return (
