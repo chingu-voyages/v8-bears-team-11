@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import firebase from "firebase/app";
+
 import {
   Card,
   FormControl,
@@ -11,6 +12,7 @@ import {
 } from "@material-ui/core";
 
 import "./SignUp.scss";
+import { db } from "../../index";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -24,8 +26,29 @@ const SignIn = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(data => {
         setAuthError(null);
+        console.log(data);
+        data.user
+          .updateProfile({
+            displayName: firstName + " " + lastName,
+            photoURL: null
+          })
+          .then(() => {
+            const myNewUser = {
+              uid: data.user.uid,
+              email: data.user.email,
+              displayName: data.user.displayName,
+              photoURL: data.user.photoURL,
+              password: password,
+              lastlogin: data.user.metadata.lastSignInTime,
+              created: data.user.metadata.creationTime
+            };
+            db.collection("users")
+              .add(myNewUser)
+              .then(docRef => console.log("Doc written with ID: ", docRef.id))
+              .catch(err => console.log("Error addign doc: ", err));
+          });
       })
       .catch(err => {
         setAuthError(err.message);

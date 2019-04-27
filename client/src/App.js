@@ -5,18 +5,21 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 // Import Components
+import Store from "./Store";
 import Layout from "./components/Layout/Layout";
 import variables from "./main.scss";
 
 const App = () => {
   return (
-    <MuiThemeProvider theme={theme}>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Switch>
-          <Route component={Layout} />
-        </Switch>
-      </BrowserRouter>
-    </MuiThemeProvider>
+    <Store>
+      <MuiThemeProvider theme={theme}>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+          <Switch>
+            <Route component={Layout} />
+          </Switch>
+        </BrowserRouter>
+      </MuiThemeProvider>
+    </Store>
   );
 };
 

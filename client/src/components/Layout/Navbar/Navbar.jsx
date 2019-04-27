@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import firebase from "firebase/app";
 import { Link } from "react-router-dom";
+
+import { UserContext } from "../../../Store";
 
 import "./Navbar.scss";
 import defaultPP from "../../../assets/pp.png";
 
 const Navbar = props => {
+  const [user] = useContext(UserContext);
+
   const logout = () => {
     firebase.auth().signOut();
   };
@@ -22,7 +26,7 @@ const Navbar = props => {
       </div>
       <span className="spacer" />
       <div className="user" onClick={logout}>
-        <p> John Doe </p>
+        <p> {user} </p>
         <img src={defaultPP} alt="PP" />
       </div>
     </div>
