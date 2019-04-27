@@ -2,7 +2,7 @@ import React from "react";
 import firebase from "firebase/app";
 import { Link } from "react-router-dom";
 
-import "./Navbar.sass";
+import "./Navbar.scss";
 import defaultPP from "../../../assets/pp.png";
 
 const Navbar = props => {
@@ -21,11 +21,9 @@ const Navbar = props => {
         </Link>
       </div>
       <span className="spacer" />
-      <div className="user">
-        <a href="/" onClick={logout}>
-          <p> John Doe </p>
-          <img src={defaultPP} alt="PP" />
-        </a>
+      <div className="user" onClick={logout}>
+        <p> John Doe </p>
+        <img src={defaultPP} alt="PP" />
       </div>
     </div>
   );

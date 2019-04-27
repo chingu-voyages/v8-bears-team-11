@@ -32,6 +32,7 @@ const SignIn = () => {
 
   return (
     <div className="signin">
+      <h1>ChinguEMR</h1>
       <Card className="card">
         <CardHeader title="Sign In" className="cardheader" />
         <form onSubmit={handleSubmit}>

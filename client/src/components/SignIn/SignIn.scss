@@ -1,5 +1,6 @@
 .signin {
   display: grid;
+  grid-template-rows: 1fr 10fr 1fr;
   background-image: linear-gradient(
     to bottom,
     #46d0f7,
@@ -16,10 +17,14 @@
     #7d2ae8
   );
   height: calc(100vh);
+  text-align: center;
+  h1 {
+    color: white;
+  }
   .card {
     margin: auto;
     width: calc(6em + 40vmin);
-    height: calc(4em + 50vmin);
+    height: calc(4em + 40vmin);
     min-height: 25em;
     border-radius: 10px;
     .cardheader {
@@ -39,14 +44,13 @@
       }
       button {
         margin: auto 0;
-        margin-bottom: 0;
       }
       .linkto,
       .linkto:visited {
-        margin: auto;
         text-decoration: none;
         color: gray;
         padding: 1em;
+        margin: 0 auto 1em auto;
       }
       .linkto:hover {
         padding: 1em;
