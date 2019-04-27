@@ -64,16 +64,25 @@ const Pacientes = () => {
       <Paper className="paperPatientsList">
         <ul>
           {results.length > 0 ? (
-            results.map(patient => {
-              return (
-                <Link
-                  key={patient.regid}
-                  to={{ pathname: `/patient/${patient.uid}` }}
-                >
-                  {patient.name}
-                </Link>
-              );
-            })
+            <div>
+              <div className="gridHead">
+                <h3>Name</h3>
+                <h3>Phone Number</h3>
+              </div>
+              {results.map((patient, index) => {
+                return (
+                  <li key={index} className={index % 2 ? "odd" : "even"}>
+                    <Link
+                      to={{ pathname: `/patient/${patient.uid}` }}
+                      className="gridBody"
+                    >
+                      <span> {patient.name} </span>
+                      <span> {patient.tel} </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </div>
           ) : (
             <span>Try searching for name or phone</span>
           )}
