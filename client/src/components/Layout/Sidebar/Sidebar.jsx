@@ -26,7 +26,7 @@ const Sidebar = () => {
       </NavLink>
       <NavLink
         className="li"
-        to="/pacientes"
+        to="/patients"
         activeStyle={{ color: variables.primary }}
       >
         <i className="material-icons">people</i>

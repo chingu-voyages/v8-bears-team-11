@@ -4,6 +4,7 @@ import Requerimientos from "../components/Requerimientos/Requerimientos";
 import Pacientes from "../components/Pacientes/Pacientes";
 import Documentos from "../components/Documentos/Documentos";
 import Farmacos from "../components/Farmacos/Farmacos";
+import PatientProfile from "../components/Pacientes/PatientProfile";
 
 const routes = [
   {
@@ -15,8 +16,12 @@ const routes = [
     component: Agenda
   },
   {
-    path: "/pacientes",
+    path: "/patients",
     component: Pacientes
+  },
+  {
+    path: "/patient/:uid",
+    component: PatientProfile
   },
   {
     path: "/documentos",

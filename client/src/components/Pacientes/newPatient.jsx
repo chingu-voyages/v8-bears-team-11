@@ -10,6 +10,8 @@ import {
 
 import Draggable from "react-draggable";
 
+import { db } from "../../index";
+
 const NewPatient = props => {
   const [name, setName] = useState("");
   const [regid, setRegId] = useState(Date.now());
@@ -17,6 +19,11 @@ const NewPatient = props => {
 
   const handleSubmit = ev => {
     ev.preventDefault();
+    db.collection("patients")
+      .add({ name, regid, tel })
+      .then(docRef => console.log("Doc written with ID: ", docRef.id))
+      .catch(err => console.log("Error addign doc: ", err));
+    props.onClose();
   };
 
   const handleClose = () => {

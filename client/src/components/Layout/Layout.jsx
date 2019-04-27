@@ -7,8 +7,6 @@ import LayoutRouter from "./LayoutRouter";
 import "./Layout.sass";
 
 function Layout() {
-  console.log("layout");
-
   const [sidebarPos, setSidebarPos] = useState(1);
 
   const handleSidebar = () => {
