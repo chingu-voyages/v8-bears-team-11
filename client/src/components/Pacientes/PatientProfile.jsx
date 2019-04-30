@@ -19,10 +19,10 @@ function PatientProfile(props) {
   }, []);
 
   return (
-    <div>
+    <div className="patientProfile">
       {patient ? (
         <div>
-          <h1>Que pedo {patient.name} </h1>
+          <h1> {patient.name} </h1>
         </div>
       ) : (
         <div>Loading...</div>
