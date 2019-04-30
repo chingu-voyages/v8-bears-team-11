@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import TimeInput from "material-ui-time-picker";
 
@@ -8,122 +8,255 @@ import {
   Input,
   InputLabel,
   Modal,
-  IconButton
+  IconButton,
+  Stepper,
+  Step,
+  StepLabel
 } from "@material-ui/core";
 
 import Draggable from "react-draggable";
+import { PatientsContext } from "../../Store";
 
-export default class Event extends React.Component {
-  state = {
-    title: ""
+const Event = props => {
+  const [patient, setPatient] = useState(props.event.title);
+  const [delbtn, setDelBtn] = useState(props.delbtn);
+  const [ready, setReady] = useState(props.ready);
+  const [open, setOpen] = useState(props.open);
+  const [remove, setRemove] = useState(props.remove);
+  const [start, setStart] = useState(props.event.start);
+  const [end, setEnd] = useState(props.event.end);
+  const [patients] = useContext(PatientsContext);
+  const [results, setResults] = useState([]);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const steps = ["Search patient", "Choose times"];
+
+  useEffect(() => {
+    if (ready === true) {
+      props.onClose({ start, end, ready, remove, title: patient });
+    }
+  }, [ready]);
+
+  useEffect(() => {
+    if (remove === true) {
+      props.onClose({ start, end, ready, remove, title: patient });
+    }
+  }, [remove]);
+
+  useEffect(() => {
+    if (open === false) {
+      props.onClose({ start, end, ready, remove, title: patient });
+    }
+  }, [open]);
+
+  const mapPropsToState = () => {
+    setPatient(props.event.title);
+    setDelBtn(props.delbtn);
+    setReady(props.ready);
+    setOpen(props.open);
+    setRemove(props.remove);
+    setStart(props.event.start);
+    setEnd(props.event.end);
   };
 
-  mapPropsToState = () => {
-    this.setState({
-      delbtn: this.props.delbtn,
-      ready: this.props.ready,
-      delete: this.props.delete,
-      start: this.props.event.start,
-      end: this.props.event.end,
-      title: this.props.event.title
-    });
-  };
-  handleTitleChange = ev => {
-    this.setState({
-      [ev.target.id]: ev.target.value
-    });
-  };
-  handleTimeChange = (date, time) => {
-    var mins = date.getMinutes();
-    var hours = date.getHours();
-    var newDate = new Date(this.state[time]);
-    newDate.setHours(hours);
-    newDate.setMinutes(mins);
-    this.setState({ [time]: newDate });
-  };
-  handleSubmit = ev => {
-    ev.preventDefault();
-    this.setState({ open: false, ready: true }, () => {
-      this.props.onClose(this.state);
-    });
-  };
-  handleDelete = () => {
-    const r = window.confirm("Está por eliminar esta cita, ¿Esta de acuerdo?");
-    if (r === true) {
-      this.setState({ open: false, delete: true }, () => {
-        this.props.onClose(this.state);
-      });
+  const handleTimeChange = (date, time) => {
+    let mins = date.getMinutes();
+    let hours = date.getHours();
+    if (time === "start") {
+      let newDate = new Date(start);
+      newDate.setHours(hours);
+      newDate.setMinutes(mins);
+      setStart(newDate);
+    }
+    if (time === "end") {
+      let newDate = new Date(end);
+      newDate.setHours(hours);
+      newDate.setMinutes(mins);
+      setEnd(newDate);
     }
   };
-  handleClose = () => {
-    this.setState({ open: false }, () => {
-      this.props.onClose(this.state);
-    });
+
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    setReady(true);
+  };
+  const handleRemove = () => {
+    const r = window.confirm(
+      "Are you sure you want to remove this scheduled patient?"
+    );
+    if (r === true) {
+      setRemove(true);
+    }
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  render() {
-    return (
-      <Modal
-        open={this.props.open}
-        onClose={this.handleClose}
-        aria-labelledby="form-dialog-title"
-        onRendered={this.mapPropsToState}
-      >
-        <Draggable handle=".header">
-          <div className="eventModal">
-            <div className="header">
-              <h3 id="form-dialog-title"> {this.props.title} </h3>
-              {this.state.delbtn ? (
-                <IconButton onClick={this.handleDelete}>
-                  <i className="material-icons">delete</i>
-                </IconButton>
-              ) : (
-                <div />
-              )}
+  // FIlter
+  const filterPatients = val => {
+    val = val.trim().toLowerCase();
+    if (val === "") {
+      setResults([]);
+    } else {
+      setResults(filterAllProperties([...patients], val));
+    }
+  };
+
+  const filterAllProperties = (array, value) => {
+    let filtrado = [];
+    for (let i = 0; i < array.length; i++) {
+      let obj = JSON.stringify(array[i]);
+      if (obj.toLowerCase().indexOf(value) >= 0) {
+        filtrado.push(JSON.parse(obj));
+      }
+    }
+    return filtrado;
+  };
+
+  const selectPatient = pat => {
+    console.log(pat);
+    setPatient(pat.name);
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
+  };
+
+  // Stepper
+  function getStepContent(stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return (
+          <div>
+            <FormControl
+              className="titleinput"
+              margin="normal"
+              required
+              fullWidth
+            >
+              <InputLabel htmlFor="title">
+                Search and select a patient
+              </InputLabel>
+              <Input
+                id="title"
+                name="title"
+                autoComplete="title"
+                autoFocus
+                onChange={e => filterPatients(e.target.value)}
+              />
+            </FormControl>
+            <ul>
+              {results.length > 0 ? (
+                <div>
+                  {results.map((patient, index) => {
+                    return (
+                      <li
+                        key={index}
+                        className={index % 2 ? "odd" : "even"}
+                        onClick={() => selectPatient(patient)}
+                      >
+                        <span> {patient.name} </span>
+                      </li>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </ul>
+          </div>
+        );
+      case 1:
+        return (
+          <div>
+            <span>{patient}</span>
+            <div className="pickers">
+              <span>Inicio</span>
+              <span>Fin</span>
+              <TimeInput
+                className="timepicker"
+                value={start}
+                onChange={date => handleTimeChange(date, "start")}
+              />
+              <TimeInput
+                className="timepicker"
+                value={end}
+                onChange={date => handleTimeChange(date, "end")}
+              />
             </div>
-            <form onSubmit={this.handleSubmit}>
-              <FormControl
-                className="titleinput"
-                margin="normal"
-                required
-                fullWidth
-              >
-                <InputLabel htmlFor="title">Nombre de paciente</InputLabel>
-                <Input
-                  id="title"
-                  name="title"
-                  autoComplete="title"
-                  autoFocus
-                  onChange={this.handleTitleChange}
-                  value={this.state.title}
-                />
-              </FormControl>
-              <div className="pickers">
-                <span>Inicio</span>
-                <span>Fin</span>
-                <TimeInput
-                  className="timepicker"
-                  value={this.state.start}
-                  onChange={date => this.handleTimeChange(date, "start")}
-                />
-                <TimeInput
-                  className="timepicker"
-                  value={this.state.end}
-                  onChange={date => this.handleTimeChange(date, "end")}
-                />
-              </div>
+          </div>
+        );
+      default:
+        return "Uknown stepIndex";
+    }
+  }
+
+  function handleBack() {
+    setResults([]);
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
+  }
+
+  return (
+    <Modal
+      open={props.open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+      disableAutoFocus={delbtn}
+      onRendered={mapPropsToState}
+    >
+      <Draggable handle=".header">
+        <div className="eventModal">
+          <div className="header">
+            <h3 id="form-dialog-title"> {props.title} </h3>
+            {delbtn ? (
+              <IconButton onClick={handleRemove}>
+                <i className="material-icons">delete</i>
+              </IconButton>
+            ) : (
+              <div />
+            )}
+          </div>
+          {delbtn ? (
+            <div>
+              {getStepContent(1)}
               <Button
-                type="submit"
-                fullWidth
                 variant="contained"
                 color="primary"
+                onClick={handleSubmit}
+                fullWidth
               >
-                {this.props.textbtn}{" "}
+                Editar
               </Button>
-            </form>
-          </div>
-        </Draggable>
-      </Modal>
-    );
-  }
-}
+            </div>
+          ) : (
+            <div className="newPatientForm">
+              <Stepper activeStep={activeStep} alternativeLabel>
+                {steps.map(label => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+              <div>
+                {getStepContent(activeStep)}
+                {activeStep === 0 ? (
+                  <div />
+                ) : (
+                  <div>
+                    <Button disabled={activeStep === 0} onClick={handleBack}>
+                      Back
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSubmit}
+                    >
+                      Agendar
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </Draggable>
+    </Modal>
+  );
+};
+
+export default Event;

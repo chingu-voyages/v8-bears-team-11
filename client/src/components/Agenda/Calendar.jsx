@@ -5,7 +5,7 @@ import BigCalendar from "react-big-calendar";
 import Event from "./Event";
 
 import moment from "moment";
-import "moment/locale/es-us";
+import "moment/locale/en-ca";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 const localizer = BigCalendar.momentLocalizer(moment);
@@ -57,8 +57,8 @@ export default class Calendar extends Component {
 
   closeEditModal = event => {
     this.setState({ openEdit: false });
-    if (event.ready || event.delete) {
-      if (event.delete) {
+    if (event.ready || event.remove) {
+      if (event.remove) {
         this.deleteEvent({ event: this.state.actualEvent });
       } else {
         this.editEvent({
@@ -82,7 +82,6 @@ export default class Calendar extends Component {
   };
 
   deleteEvent = ({ event }) => {
-    console.log(event);
     this.setState((prevState, props) => {
       const events = [...prevState.events];
       const idx = events.indexOf(event);
@@ -103,36 +102,33 @@ export default class Calendar extends Component {
         defaultView={BigCalendar.Views.WEEK}
         step={15}
         messages={{
-          month: "Mes",
-          day: "Dia",
-          today: "Hoy",
           previous: "<",
           next: ">",
-          week: "Semana",
-          noEventsInRange: "No existen citas para este rango de fechas"
+          noEventsInRange: "There are no patients scheduled for this time range"
         }}
         timeslots={4}
         min={new Date("2019, 1, 1, 08:00")}
         max={new Date("2019, 1, 1, 20:00")}
         style={{ height: "100vh" }}
       />
-      {this.state.actualEvent ? (
+      {this.state.openCreate ? (
         <div>
           <Event
             title="Nueva cita"
-            textbtn="Agendar"
             ready={false}
-            delete={false}
+            remove={false}
             delbtn={false}
             open={this.state.openCreate}
             event={this.state.actualEvent}
             onClose={this.createEvent}
           />
+        </div>
+      ) : this.state.openEdit ? (
+        <div>
           <Event
             title="Editar cita"
-            textbtn="Editar"
             ready={false}
-            delete={false}
+            remove={false}
             delbtn={true}
             open={this.state.openEdit}
             event={this.state.actualEvent}
