@@ -50,9 +50,13 @@ const Event = props => {
   }, [open]);
 
   const mapPropsToState = () => {
-    console.log(props);
     if (props.delbtn) {
-      setPatient(props.event.patient);
+      patients.forEach(pat => {
+        let res = pat.uid.localeCompare(props.event.puid);
+        if (res === 0) {
+          setPatient(pat);
+        }
+      });
     }
     setDelBtn(props.delbtn);
     setReady(props.ready);

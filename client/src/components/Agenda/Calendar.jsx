@@ -1,76 +1,52 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import BigCalendar from "react-big-calendar";
 
 import Event from "./Event";
 
 import moment from "moment";
-import "moment/locale/en-ca";
+// import "moment/locale/en-ca";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 const localizer = BigCalendar.momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
-export default class Calendar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      events: [],
-      openCreate: false,
-      openEdit: false,
-      actualEvent: null
-    };
-    this.createEvent = this.createEvent.bind(this);
-    this.editEvent = this.editEvent.bind(this);
-    this.deleteEvent = this.deleteEvent.bind(this);
-    this.openCreateModal = this.openCreateModal.bind(this);
-    this.openEditModal = this.openEditModal.bind(this);
-    this.closeEditModal = this.closeEditModal.bind(this);
-  }
+const Calendar = () => {
+  const [events, setEvents] = useState([]);
+  const [openCreate, setOpenCreate] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [actualEvent, setActualEvent] = useState(null);
 
-  //TODO on resize (window for mobile) change calendar view to TODAY or AGENDA
-  //   https://codepen.io/jagretz/pen/VWbwOQ?editors=1111
-
-  openCreateModal = ev => {
-    this.setState({
-      openCreate: true,
-      actualEvent: { start: ev.start, end: ev.end, title: "" }
-    });
+  const openCreateModal = ev => {
+    setActualEvent({ start: ev.start, end: ev.end, title: "" });
+    setOpenCreate(true);
   };
-  createEvent = event => {
-    console.log(event);
-    this.setState({ openCreate: false });
+  const createEvent = event => {
+    setOpenCreate(false);
     if (event.ready) {
       let newEvent = {
         title: event.patient.name,
         start: event.start,
         end: event.end,
-        patient: event.patient
+        puid: event.patient.uid
       };
-      this.setState(
-        {
-          events: this.state.events.concat([newEvent])
-        },
-        () => {
-          console.log(this.state.events);
-        }
-      );
+      setEvents(events => events.concat([newEvent]));
     }
   };
 
-  openEditModal = ev => {
-    this.setState({ openEdit: true, actualEvent: ev });
+  const openEditModal = ev => {
+    setActualEvent(ev);
+    setOpenEdit(true);
   };
 
-  closeEditModal = event => {
-    console.log(event);
-    this.setState({ openEdit: false });
+  const closeEditModal = event => {
+    setOpenEdit(false);
     if (event.ready || event.remove) {
       if (event.remove) {
-        this.deleteEvent({ event: this.state.actualEvent });
+        deleteEvent(actualEvent);
       } else {
-        this.editEvent({
-          event: this.state.actualEvent,
+        editEvent({
+          event: actualEvent,
           start: event.start,
           end: event.end
         });
@@ -78,35 +54,34 @@ export default class Calendar extends Component {
     }
   };
 
-  editEvent = ({ event, start, end }) => {
-    const { events } = this.state;
+  const editEvent = ({ event, start, end }) => {
     const idx = events.indexOf(event);
     let newEvent = { ...event, start, end };
     const nextEvents = [...events];
     nextEvents.splice(idx, 1, newEvent);
-    this.setState({
-      events: nextEvents
-    });
+    setEvents(nextEvents);
   };
 
-  deleteEvent = ({ event }) => {
-    this.setState((prevState, props) => {
-      const events = [...prevState.events];
-      const idx = events.indexOf(event);
-      events.splice(idx, 1);
-      return { events };
-    });
+  const deleteEvent = event => {
+    const myEvents = [...events];
+    const idx = myEvents.indexOf(event);
+    myEvents.splice(idx, 1);
+    setEvents(myEvents);
   };
 
-  render = () => (
+  useEffect(() => {
+    console.log(events);
+  }, [events]);
+
+  return (
     <div>
       <DragAndDropCalendar
         selectable
         localizer={localizer}
-        events={this.state.events}
-        onEventDrop={this.editEvent}
-        onSelectSlot={this.openCreateModal}
-        onSelectEvent={this.openEditModal}
+        events={events}
+        onEventDrop={editEvent}
+        onSelectSlot={openCreateModal}
+        onSelectEvent={openEditModal}
         defaultView={BigCalendar.Views.WEEK}
         step={15}
         messages={{
@@ -119,31 +94,33 @@ export default class Calendar extends Component {
         max={new Date("2019, 1, 1, 20:00")}
         style={{ height: "100vh" }}
       />
-      {this.state.openCreate ? (
+      {openCreate ? (
         <div>
           <Event
             title="New appointment"
             ready={false}
             remove={false}
             delbtn={false}
-            open={this.state.openCreate}
-            event={this.state.actualEvent}
-            onClose={this.createEvent}
+            open={openCreate}
+            event={actualEvent}
+            onClose={createEvent}
           />
         </div>
-      ) : this.state.openEdit ? (
+      ) : openEdit ? (
         <div>
           <Event
             title="Edit appointment"
             ready={false}
             remove={false}
             delbtn={true}
-            open={this.state.openEdit}
-            event={this.state.actualEvent}
-            onClose={this.closeEditModal}
+            open={openEdit}
+            event={actualEvent}
+            onClose={closeEditModal}
           />
         </div>
       ) : null}
     </div>
   );
-}
+};
+
+export default Calendar;
