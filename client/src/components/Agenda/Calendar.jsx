@@ -38,16 +38,23 @@ export default class Calendar extends Component {
     });
   };
   createEvent = event => {
+    console.log(event);
     this.setState({ openCreate: false });
     if (event.ready) {
       let newEvent = {
-        title: event.title,
+        title: event.patient.name,
         start: event.start,
-        end: event.end
+        end: event.end,
+        patient: event.patient
       };
-      this.setState({
-        events: this.state.events.concat([newEvent])
-      });
+      this.setState(
+        {
+          events: this.state.events.concat([newEvent])
+        },
+        () => {
+          console.log(this.state.events);
+        }
+      );
     }
   };
 
@@ -56,6 +63,7 @@ export default class Calendar extends Component {
   };
 
   closeEditModal = event => {
+    console.log(event);
     this.setState({ openEdit: false });
     if (event.ready || event.remove) {
       if (event.remove) {
@@ -114,7 +122,7 @@ export default class Calendar extends Component {
       {this.state.openCreate ? (
         <div>
           <Event
-            title="Nueva cita"
+            title="New appointment"
             ready={false}
             remove={false}
             delbtn={false}
@@ -126,7 +134,7 @@ export default class Calendar extends Component {
       ) : this.state.openEdit ? (
         <div>
           <Event
-            title="Editar cita"
+            title="Edit appointment"
             ready={false}
             remove={false}
             delbtn={true}

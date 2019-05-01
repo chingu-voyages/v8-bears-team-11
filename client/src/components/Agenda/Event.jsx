@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-
+import { Link } from "react-router-dom";
 import TimeInput from "material-ui-time-picker";
 
 import {
@@ -18,7 +18,7 @@ import Draggable from "react-draggable";
 import { PatientsContext } from "../../Store";
 
 const Event = props => {
-  const [patient, setPatient] = useState(props.event.title);
+  const [patient, setPatient] = useState({});
   const [delbtn, setDelBtn] = useState(props.delbtn);
   const [ready, setReady] = useState(props.ready);
   const [open, setOpen] = useState(props.open);
@@ -29,28 +29,31 @@ const Event = props => {
   const [results, setResults] = useState([]);
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps = ["Search patient", "Choose times"];
+  const steps = ["Search", "Set times"];
 
   useEffect(() => {
     if (ready === true) {
-      props.onClose({ start, end, ready, remove, title: patient });
+      props.onClose({ start, end, ready, remove, patient });
     }
   }, [ready]);
 
   useEffect(() => {
     if (remove === true) {
-      props.onClose({ start, end, ready, remove, title: patient });
+      props.onClose({ start, end, ready, remove, patient });
     }
   }, [remove]);
 
   useEffect(() => {
     if (open === false) {
-      props.onClose({ start, end, ready, remove, title: patient });
+      props.onClose({ start, end, ready, remove, patient });
     }
   }, [open]);
 
   const mapPropsToState = () => {
-    setPatient(props.event.title);
+    console.log(props);
+    if (props.delbtn) {
+      setPatient(props.event.patient);
+    }
     setDelBtn(props.delbtn);
     setReady(props.ready);
     setOpen(props.open);
@@ -114,8 +117,7 @@ const Event = props => {
   };
 
   const selectPatient = pat => {
-    console.log(pat);
-    setPatient(pat.name);
+    setPatient(pat);
     setActiveStep(prevActiveStep => prevActiveStep + 1);
   };
 
@@ -124,7 +126,7 @@ const Event = props => {
     switch (stepIndex) {
       case 0:
         return (
-          <div>
+          <div className="case0">
             <FormControl
               className="titleinput"
               margin="normal"
@@ -142,14 +144,14 @@ const Event = props => {
                 onChange={e => filterPatients(e.target.value)}
               />
             </FormControl>
-            <ul>
+            <ul className="patientList">
               {results.length > 0 ? (
                 <div>
                   {results.map((patient, index) => {
                     return (
                       <li
                         key={index}
-                        className={index % 2 ? "odd" : "even"}
+                        className={index % 2 ? "even" : "odd"}
                         onClick={() => selectPatient(patient)}
                       >
                         <span> {patient.name} </span>
@@ -163,11 +165,17 @@ const Event = props => {
         );
       case 1:
         return (
-          <div>
-            <span>{patient}</span>
+          <div className="case1">
+            {delbtn ? (
+              <Link to={{ pathname: `/patient/${patient.uid}` }}>
+                <h3>{patient.name}</h3>
+              </Link>
+            ) : (
+              <h3>{patient.name}</h3>
+            )}
             <div className="pickers">
-              <span>Inicio</span>
-              <span>Fin</span>
+              <span>Start</span>
+              <span>End</span>
               <TimeInput
                 className="timepicker"
                 value={start}
@@ -212,7 +220,7 @@ const Event = props => {
             )}
           </div>
           {delbtn ? (
-            <div>
+            <div className="editContent">
               {getStepContent(1)}
               <Button
                 variant="contained"
@@ -220,11 +228,11 @@ const Event = props => {
                 onClick={handleSubmit}
                 fullWidth
               >
-                Editar
+                Edit
               </Button>
             </div>
           ) : (
-            <div className="newPatientForm">
+            <div className="newContent">
               <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map(label => (
                   <Step key={label}>
@@ -232,25 +240,27 @@ const Event = props => {
                   </Step>
                 ))}
               </Stepper>
-              <div>
-                {getStepContent(activeStep)}
-                {activeStep === 0 ? (
-                  <div />
-                ) : (
-                  <div>
-                    <Button disabled={activeStep === 0} onClick={handleBack}>
-                      Back
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleSubmit}
-                    >
-                      Agendar
-                    </Button>
-                  </div>
-                )}
-              </div>
+              {getStepContent(activeStep)}
+              {activeStep === 0 ? (
+                <div />
+              ) : (
+                <div className="btns">
+                  <Button
+                    variant="contained"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                  >
+                    Save
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </div>
