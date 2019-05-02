@@ -52,7 +52,7 @@ const Event = props => {
   const mapPropsToState = () => {
     if (props.delbtn) {
       patients.forEach(pat => {
-        let res = pat.uid.localeCompare(props.event.puid);
+        let res = pat.uid.localeCompare(props.event.patientid);
         if (res === 0) {
           setPatient(pat);
         }
