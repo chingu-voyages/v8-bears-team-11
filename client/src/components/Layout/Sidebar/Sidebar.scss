@@ -41,6 +41,12 @@
 
 .sidebarMin {
   width: 70px;
+  transition: width 0.5s ease-in-out;
+  background-color: white;
+}
+.sidebarMin:hover {
+  transition-delay: 1s;
+  width: 240px;
 }
 
 .sidebarOpen {
