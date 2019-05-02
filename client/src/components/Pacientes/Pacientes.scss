@@ -25,6 +25,54 @@
       padding: 0 2.5em;
     }
   }
+  .paperPatientsList {
+    min-height: 20em;
+    text-align: center;
+    margin: 2em auto;
+    display: flex;
+    ul {
+      margin: auto;
+      width: 100%;
+      padding: 1em;
+      :first-child {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+      :last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+      .gridHead {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background-color: #46d0f7;
+        color: ghostwhite;
+      }
+      li {
+        list-style: none;
+        padding: 8px 0;
+        a.gridBody {
+          text-decoration: none;
+          display: grid;
+          margin: 0;
+          grid-template-columns: 1fr 1fr;
+          color: gray;
+        }
+      }
+      li:hover {
+        background-color: #964bf9;
+        * {
+          color: white;
+        }
+      }
+      .odd {
+        background-color: #46d0f73b;
+      }
+      .even {
+        background-color: ghostwhite;
+      }
+    }
+  }
 }
 .newPatientModal {
   background-color: #fefefe;
@@ -52,4 +100,8 @@
       color: gray;
     }
   }
+}
+
+.patientProfile {
+  padding: 2em;
 }

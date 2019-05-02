@@ -1,68 +1,75 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+
+import { db } from "../../index";
 
 import BigCalendar from "react-big-calendar";
 
 import Event from "./Event";
 
 import moment from "moment";
-import "moment/locale/es-us";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 const localizer = BigCalendar.momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
-export default class Calendar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      events: [],
-      openCreate: false,
-      openEdit: false,
-      actualEvent: null
-    };
-    this.createEvent = this.createEvent.bind(this);
-    this.editEvent = this.editEvent.bind(this);
-    this.deleteEvent = this.deleteEvent.bind(this);
-    this.openCreateModal = this.openCreateModal.bind(this);
-    this.openEditModal = this.openEditModal.bind(this);
-    this.closeEditModal = this.closeEditModal.bind(this);
-  }
+const Calendar = () => {
+  const [events, setEvents] = useState([]);
+  const [openCreate, setOpenCreate] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [actualEvent, setActualEvent] = useState(null);
 
-  //TODO on resize (window for mobile) change calendar view to TODAY or AGENDA
-  //   https://codepen.io/jagretz/pen/VWbwOQ?editors=1111
-
-  openCreateModal = ev => {
-    this.setState({
-      openCreate: true,
-      actualEvent: { start: ev.start, end: ev.end, title: "" }
+  // READ FOR EVENTS IN DB
+  useEffect(() => {
+    db.collection("events").onSnapshot(data => {
+      if (!data.empty) {
+        let myEvents = [];
+        data.forEach(ev => {
+          // Convert FB time to Calendar Time
+          let calStart = new Date(ev.data().start.toMillis());
+          let calEnd = new Date(ev.data().end.toMillis());
+          let evn = { ...ev.data(), start: calStart, end: calEnd, uid: ev.id };
+          myEvents.push(evn);
+        });
+        setEvents(myEvents);
+      } else {
+        console.log("there are no events");
+        setEvents([]);
+      }
     });
+  }, []);
+
+  const openCreateModal = ev => {
+    setActualEvent({ start: ev.start, end: ev.end, title: "" });
+    setOpenCreate(true);
   };
-  createEvent = event => {
-    this.setState({ openCreate: false });
+  const createEvent = event => {
+    setOpenCreate(false);
     if (event.ready) {
       let newEvent = {
-        title: event.title,
+        title: event.patient.name,
         start: event.start,
-        end: event.end
+        end: event.end,
+        patientid: event.patient.uid
       };
-      this.setState({
-        events: this.state.events.concat([newEvent])
-      });
+      db.collection("events")
+        .add(newEvent)
+        .catch(err => console.log("Error addign event: ", err));
     }
   };
 
-  openEditModal = ev => {
-    this.setState({ openEdit: true, actualEvent: ev });
+  const openEditModal = ev => {
+    setActualEvent(ev);
+    setOpenEdit(true);
   };
 
-  closeEditModal = event => {
-    this.setState({ openEdit: false });
-    if (event.ready || event.delete) {
-      if (event.delete) {
-        this.deleteEvent({ event: this.state.actualEvent });
+  const closeEditModal = event => {
+    setOpenEdit(false);
+    if (event.ready || event.remove) {
+      if (event.remove) {
+        deleteEvent(actualEvent);
       } else {
-        this.editEvent({
-          event: this.state.actualEvent,
+        editEvent({
+          event: actualEvent,
           start: event.start,
           end: event.end
         });
@@ -70,76 +77,69 @@ export default class Calendar extends Component {
     }
   };
 
-  editEvent = ({ event, start, end }) => {
-    const { events } = this.state;
-    const idx = events.indexOf(event);
+  const editEvent = ({ event, start, end }) => {
     let newEvent = { ...event, start, end };
-    const nextEvents = [...events];
-    nextEvents.splice(idx, 1, newEvent);
-    this.setState({
-      events: nextEvents
-    });
+    db.collection("events")
+      .doc(event.uid)
+      .update(newEvent)
+      .catch(err => console.error("Error updating event: ", err));
   };
 
-  deleteEvent = ({ event }) => {
-    console.log(event);
-    this.setState((prevState, props) => {
-      const events = [...prevState.events];
-      const idx = events.indexOf(event);
-      events.splice(idx, 1);
-      return { events };
-    });
+  const deleteEvent = event => {
+    db.collection("events")
+      .doc(event.uid)
+      .delete()
+      .catch(err => console.error("Error removing event: ", err));
   };
 
-  render = () => (
+  return (
     <div>
       <DragAndDropCalendar
         selectable
         localizer={localizer}
-        events={this.state.events}
-        onEventDrop={this.editEvent}
-        onSelectSlot={this.openCreateModal}
-        onSelectEvent={this.openEditModal}
+        events={events}
+        onEventDrop={editEvent}
+        onSelectSlot={openCreateModal}
+        onSelectEvent={openEditModal}
         defaultView={BigCalendar.Views.WEEK}
-        step={15}
+        step={30}
         messages={{
-          month: "Mes",
-          day: "Dia",
-          today: "Hoy",
           previous: "<",
           next: ">",
-          week: "Semana",
-          noEventsInRange: "No existen citas para este rango de fechas"
+          noEventsInRange: "There are no patients scheduled for this time range"
         }}
-        timeslots={4}
+        timeslots={2}
         min={new Date("2019, 1, 1, 08:00")}
         max={new Date("2019, 1, 1, 20:00")}
         style={{ height: "100vh" }}
       />
-      {this.state.actualEvent ? (
+      {openCreate ? (
         <div>
           <Event
-            title="Nueva cita"
-            textbtn="Agendar"
+            title="New appointment"
             ready={false}
-            delete={false}
+            remove={false}
             delbtn={false}
-            open={this.state.openCreate}
-            event={this.state.actualEvent}
-            onClose={this.createEvent}
+            open={openCreate}
+            event={actualEvent}
+            onClose={createEvent}
           />
+        </div>
+      ) : openEdit ? (
+        <div>
           <Event
-            title="Editar cita"
-            textbtn="Editar"
+            title="Edit appointment"
             ready={false}
-            delete={false}
+            remove={false}
             delbtn={true}
-            open={this.state.openEdit}
-            event={this.state.actualEvent}
-            onClose={this.closeEditModal}
+            open={openEdit}
+            event={actualEvent}
+            onClose={closeEditModal}
           />
         </div>
       ) : null}
     </div>
   );
-}
+};
+
+export default Calendar;

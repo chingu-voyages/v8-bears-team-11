@@ -76,7 +76,12 @@ const SignIn = () => {
               onChange={e => setEmail(e.target.value)}
             />
           </FormControl>
-          <FormControl margin="normal" required fullWidth>
+          <FormControl
+            className="passwordInput"
+            margin="normal"
+            required
+            fullWidth
+          >
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input
               name="password"
@@ -86,7 +91,12 @@ const SignIn = () => {
               onChange={e => setPassword(e.target.value)}
             />
           </FormControl>
-          <FormControl margin="normal" required fullWidth>
+          <FormControl
+            className="firstNameInput"
+            margin="normal"
+            required
+            fullWidth
+          >
             <InputLabel htmlFor="firstName">First Name</InputLabel>
             <Input
               id="firstName"
@@ -95,7 +105,12 @@ const SignIn = () => {
               onChange={e => setFirstName(e.target.value)}
             />
           </FormControl>
-          <FormControl margin="normal" required fullWidth>
+          <FormControl
+            className="lastNameInput"
+            margin="normal"
+            required
+            fullWidth
+          >
             <InputLabel htmlFor="lastName">Last Name</InputLabel>
             <Input
               id="lastName"
@@ -113,6 +128,9 @@ const SignIn = () => {
           </Link>
         </form>
       </Card>
+      <p>
+        <strong> v8-bears-team-11</strong>
+      </p>
     </div>
   );
 };
