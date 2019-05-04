@@ -1,0 +1,45 @@
+.patientProfile {
+  .superior {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 2em;
+    .personalData {
+      .sectionHeader {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 1em;
+        background-color: #964bf9;
+        color: white;
+        button {
+          margin: auto 0;
+          background-color: white;
+        }
+      }
+      .sectionContent {
+        border: 8px solid #964bf9;
+        padding: 1em;
+        border-top: none;
+        > div {
+          margin: 5px 1em;
+        }
+        .selectGender {
+          width: 8em;
+        }
+        .dob {
+          input::-webkit-inner-spin-button {
+            display: none;
+          }
+          input::-webkit-calendar-picker-indicator {
+            opacity: 0;
+          }
+          input {
+            background: #fff
+              url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+              93% 50% no-repeat;
+          }
+        }
+      }
+    }
+  }
+}
