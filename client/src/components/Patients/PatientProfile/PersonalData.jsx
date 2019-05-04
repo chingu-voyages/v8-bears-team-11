@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Material
 import TextField from "@material-ui/core/TextField";
@@ -14,6 +14,10 @@ function PersonalData(props) {
   const [mydate, setMyDate] = useState(null);
   const [disabledFlag, setDisabledFlag] = useState(true);
 
+  useEffect(() => {
+    setPatient(props.patient);
+  }, [props]);
+
   const handlePersonalData = () => {
     if (disabledFlag) {
       setDisabledFlag(false);
@@ -22,7 +26,11 @@ function PersonalData(props) {
       if (mydate) {
         calculateAge(mydate);
       }
-      props.patRef.update({ ...patient });
+      props.patRef.update({
+        ...patient,
+        edited: new Date(),
+        editedBy: props.user
+      });
     }
   };
 

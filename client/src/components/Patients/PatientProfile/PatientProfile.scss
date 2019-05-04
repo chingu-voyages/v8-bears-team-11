@@ -2,6 +2,14 @@
   h1 {
     margin-left: 1em;
     color: dimgray;
+    small,
+    span {
+      color: gray;
+      font-size: 18px;
+    }
+    small {
+      padding-left: 1em;
+    }
   }
   .superior {
     padding: 1em;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Material
 import TextField from "@material-ui/core/TextField";
@@ -14,13 +14,20 @@ function ClinicalHistory(props) {
   const [patient, setPatient] = useState(props.patient);
   const [disabledFlag, setDisabledFlag] = useState(true);
 
+  useEffect(() => {
+    setPatient(props.patient);
+  }, [props]);
+
   const handlePersonalData = () => {
     if (disabledFlag) {
       setDisabledFlag(false);
     } else {
       setDisabledFlag(true);
-      console.log(patient);
-      props.patRef.update({ ...patient });
+      props.patRef.update({
+        ...patient,
+        edited: new Date(),
+        editedBy: props.user
+      });
     }
   };
 

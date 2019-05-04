@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { db } from "../../../index";
 
@@ -6,11 +6,13 @@ import "./PatientProfile.scss";
 import Paper from "@material-ui/core/Paper";
 import PersonalData from "./PersonalData";
 import ClinicalHistory from "./ClinicalHistory";
+import { UserContext } from "../../../Store";
 
 function PatientProfile(props) {
   const patientID = props.match.params.uid;
   const patRef = db.collection("patients").doc(patientID);
   const [patient, setPatient] = useState(null);
+  const [user] = useContext(UserContext);
 
   // READ FOR PATIENT DATA AND UPDATE COMPONENT
   useEffect(() => {
@@ -24,29 +26,21 @@ function PatientProfile(props) {
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (patient) {
-        let lastSeen = new Date();
-        patRef.update({ ...patient, lastSeen: lastSeen.getTime() });
-      }
-    };
-  }, [patient]);
-
   return (
     <div className="patientProfile">
       {patient ? (
         <>
           <h1>
             {patient.name}
-            {patient.age ? ", " + patient.age + " years old" : null}
+            {patient.age ? <small>{patient.age + " years old"} </small> : null}
+            {patient.gender ? <span>{patient.gender} </span> : null}
           </h1>
           <Paper className="superior">
             <div className="personalData">
-              <PersonalData patient={patient} patRef={patRef} />
+              <PersonalData patient={patient} patRef={patRef} user={user} />
             </div>
             <div className="clinicalHistory">
-              <ClinicalHistory patient={patient} patRef={patRef} />
+              <ClinicalHistory patient={patient} patRef={patRef} user={user} />
             </div>
           </Paper>
         </>
