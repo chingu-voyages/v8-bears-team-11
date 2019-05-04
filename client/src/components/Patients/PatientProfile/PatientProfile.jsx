@@ -14,13 +14,24 @@ function PatientProfile(props) {
 
   // READ FOR PATIENT DATA AND UPDATE COMPONENT
   useEffect(() => {
-    db.collection("patients")
+    let unsubscribe = db
+      .collection("patients")
       .doc(patientID)
       .onSnapshot(snap => {
         let pat = snap.data();
         setPatient(pat);
       });
+    return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (patient) {
+        let lastSeen = new Date();
+        patRef.update({ ...patient, lastSeen: lastSeen.getTime() });
+      }
+    };
+  }, [patient]);
 
   return (
     <div className="patientProfile">
