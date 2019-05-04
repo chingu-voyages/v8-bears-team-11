@@ -50,8 +50,9 @@ const Pacientes = () => {
       .limit(5)
       .onSnapshot(pats => {
         let recentPatients = [];
-        pats.forEach(pat => {
-          recentPatients.push(pat.data());
+        pats.forEach(patient => {
+          let pat = { ...patient.data(), uid: patient.id };
+          recentPatients.push(pat);
         });
         console.log(recentPatients);
 
