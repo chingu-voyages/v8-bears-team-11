@@ -30,7 +30,7 @@ const Sidebar = () => {
         activeStyle={{ color: variables.primary }}
       >
         <i className="material-icons">people</i>
-        <span>Pacientes</span>
+        <span>Patients</span>
       </NavLink>
       <NavLink
         className="li"

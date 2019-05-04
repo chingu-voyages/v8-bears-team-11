@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 
-import "./Pacientes.scss";
+import "./Patients.scss";
 import NewPatient from "./newPatient";
 import { PatientsContext } from "../../Store";
 

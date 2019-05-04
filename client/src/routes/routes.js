@@ -1,10 +1,10 @@
 import Agenda from "../components/Agenda/Agenda";
 import Dashboard from "../components/Dashboard/Dashboard";
 import Requerimientos from "../components/Requerimientos/Requerimientos";
-import Pacientes from "../components/Pacientes/Pacientes";
+import Patients from "../components/Patients/Patients";
 import Documentos from "../components/Documentos/Documentos";
 import Farmacos from "../components/Farmacos/Farmacos";
-import PatientProfile from "../components/Pacientes/PatientProfile";
+import PatientProfile from "../components/Patients/PatientProfile/PatientProfile";
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: "/patients",
-    component: Pacientes
+    component: Patients
   },
   {
     path: "/patient/:uid",
