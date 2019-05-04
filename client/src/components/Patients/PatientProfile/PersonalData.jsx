@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 // Material
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -52,66 +52,78 @@ function PersonalData(props) {
   return (
     <>
       <div className="sectionHeader">
-        <p>Personal Data</p>
-        <Button variant="contained" onClick={handlePersonalData}>
-          {disabledFlag ? "Edit" : "Save"}
-        </Button>
+        <span>Personal Data</span>
+        <IconButton aria-label="Delete" onClick={handlePersonalData}>
+          {disabledFlag ? (
+            <i className="material-icons">edit</i>
+          ) : (
+            <i className="material-icons">save</i>
+          )}
+        </IconButton>
       </div>
       <form className="sectionContent">
-        <TextField
-          label="Telephone"
-          variant="outlined"
-          disabled={disabledFlag ? true : false}
-          value={patient.tel ? patient.tel : ""}
-          onChange={e => setPatient({ ...patient, tel: e.target.value })}
-        />
-        <TextField
-          label="Email"
-          variant="outlined"
-          disabled={disabledFlag ? true : false}
-          value={patient.email ? patient.email : ""}
-          onChange={e => setPatient({ ...patient, email: e.target.value })}
-        />
-        <TextField
-          label="Address"
-          variant="outlined"
-          disabled={disabledFlag ? true : false}
-          value={patient.address ? patient.address : ""}
-          onChange={e => setPatient({ ...patient, address: e.target.value })}
-        />
-        <FormControl
-          className="selectGender"
-          variant="outlined"
-          disabled={disabledFlag ? true : false}
-        >
-          <InputLabel htmlFor="gender">Gender</InputLabel>
-          <Select
-            value={patient.gender ? patient.gender : ""}
-            onChange={e => setPatient({ ...patient, gender: e.target.value })}
-            input={<OutlinedInput labelWidth={50} name="gender" id="gender" />}
+        <div className="content">
+          <TextField
+            label="Telephone"
+            variant="outlined"
+            disabled={disabledFlag ? true : false}
+            value={patient.tel ? patient.tel : ""}
+            onChange={e => setPatient({ ...patient, tel: e.target.value })}
+          />
+          <TextField
+            label="Email"
+            variant="outlined"
+            disabled={disabledFlag ? true : false}
+            value={patient.email ? patient.email : ""}
+            onChange={e => setPatient({ ...patient, email: e.target.value })}
+          />
+          <TextField
+            className="address"
+            label="Address"
+            variant="outlined"
+            fullWidth
+            multiline
+            rows="3"
+            disabled={disabledFlag ? true : false}
+            value={patient.address ? patient.address : ""}
+            onChange={e => setPatient({ ...patient, address: e.target.value })}
+          />
+          <FormControl
+            className="selectGender"
+            variant="outlined"
+            disabled={disabledFlag ? true : false}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value="Male">Male</MenuItem>
-            <MenuItem value="Female">Female</MenuItem>
-            <MenuItem value="Other">Other</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          className="dob"
-          label="Birthday"
-          variant="outlined"
-          disabled={disabledFlag ? true : false}
-          type="date"
-          defaultValue={patient.dob ? renderDate() : ""}
-          InputLabelProps={{
-            shrink: true
-          }}
-          onChange={e => {
-            setMyDate(e.target.value);
-          }}
-        />
+            <InputLabel htmlFor="gender">Gender</InputLabel>
+            <Select
+              value={patient.gender ? patient.gender : ""}
+              onChange={e => setPatient({ ...patient, gender: e.target.value })}
+              input={
+                <OutlinedInput labelWidth={50} name="gender" id="gender" />
+              }
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            className="dob"
+            label="Birthday"
+            variant="outlined"
+            disabled={disabledFlag ? true : false}
+            type="date"
+            defaultValue={patient.dob ? renderDate() : ""}
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={e => {
+              setMyDate(e.target.value);
+            }}
+          />
+        </div>
       </form>
     </>
   );

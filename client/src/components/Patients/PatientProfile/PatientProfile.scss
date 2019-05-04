@@ -1,45 +1,106 @@
 .patientProfile {
+  h1 {
+    margin-left: 1em;
+    color: dimgray;
+  }
   .superior {
     padding: 1em;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 2em;
-    .personalData {
+    .personalData,
+    .clinicalHistory {
       .sectionHeader {
         display: flex;
         justify-content: space-between;
-        padding: 0 1em;
-        background-color: #964bf9;
+        align-items: center;
+        padding: 0 6px 0 1em;
+        position: relative;
+        background: linear-gradient(45deg, #46d0f7, #7d2ae8);
         color: white;
+        border-top-right-radius: 12px;
+        border-top-left-radius: 12px;
         button {
           margin: auto 0;
-          background-color: white;
+          padding: 6px;
         }
       }
       .sectionContent {
-        border: 8px solid #964bf9;
-        padding: 1em;
-        border-top: none;
-        > div {
-          margin: 5px 1em;
-        }
-        .selectGender {
-          width: 8em;
-        }
-        .dob {
-          input::-webkit-inner-spin-button {
-            display: none;
+        padding: 6px;
+        margin: 0;
+        margin-top: -10px;
+        border: solid 1px transparent;
+        border-radius: 12px;
+        background-image: linear-gradient(white, white),
+          radial-gradient(circle at top left, #46d0f7, #7d2ae8);
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        .content {
+          padding: 1em;
+          display: flex;
+          flex-flow: wrap;
+          > div {
+            margin: 5px 1em;
           }
-          input::-webkit-calendar-picker-indicator {
-            opacity: 0;
+          .selectGender {
+            width: 8em;
           }
-          input {
-            background: #fff
-              url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
-              93% 50% no-repeat;
+          .dob {
+            input::-webkit-inner-spin-button {
+              display: none;
+            }
+            input::-webkit-calendar-picker-indicator {
+              opacity: 0;
+            }
+            input {
+              background: #fff
+                url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+                93% 50% no-repeat;
+            }
           }
         }
       }
     }
+    .clinicalHistory {
+      .sectionContent {
+        .content {
+          display: grid;
+          grid-template-rows: 1fr 1fr;
+          .row1 {
+            display: grid;
+            grid-gap: 1em;
+            grid-template-columns: 1fr 2fr 2fr;
+            .left {
+              display: grid;
+              grid-template-rows: 1fr 1fr 1fr;
+              grid-gap: 1em;
+              > div {
+                margin: 0 auto;
+                max-width: 8em;
+              }
+            }
+            .area {
+              margin: auto 0;
+            }
+          }
+          .row2 {
+            display: grid;
+            grid-gap: 1em;
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+      }
+    }
+  }
+  .MuiInputBase-root-72,
+  .MuiFormLabel-root-52 {
+    font-size: 14px;
+    line-height: 14px;
+  }
+  .MuiOutlinedInput-input-67 {
+    padding: 14.5px 14px;
+  }
+  .MuiInputLabel-outlined-51 {
+    transform: translate(14px, 14px) scale(1);
   }
 }

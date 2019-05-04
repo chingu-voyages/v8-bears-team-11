@@ -5,6 +5,7 @@ import { db } from "../../../index";
 import "./PatientProfile.scss";
 import Paper from "@material-ui/core/Paper";
 import PersonalData from "./PersonalData";
+import ClinicalHistory from "./ClinicalHistory";
 
 function PatientProfile(props) {
   const patientID = props.match.params.uid;
@@ -26,11 +27,15 @@ function PatientProfile(props) {
       {patient ? (
         <>
           <h1>
-            {patient.name} {patient.age ? patient.age + " years" : null}
+            {patient.name}
+            {patient.age ? ", " + patient.age + " years old" : null}
           </h1>
           <Paper className="superior">
             <div className="personalData">
               <PersonalData patient={patient} patRef={patRef} />
+            </div>
+            <div className="clinicalHistory">
+              <ClinicalHistory patient={patient} patRef={patRef} />
             </div>
           </Paper>
         </>
