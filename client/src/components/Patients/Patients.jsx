@@ -54,8 +54,6 @@ const Pacientes = () => {
           let pat = { ...patient.data(), uid: patient.id };
           recentPatients.push(pat);
         });
-        console.log(recentPatients);
-
         setRecents(recentPatients);
       });
     return unsubcribe;
@@ -82,13 +80,13 @@ const Pacientes = () => {
           color="primary"
           onClick={() => setNewPatientModal(true)}
         >
-          + New patient
+          New patient
         </Button>
       </Paper>
       <Paper className="paperPatientsList">
         <ul>
           {results.length > 0 ? (
-            <div>
+            <>
               <div className="gridHead">
                 <h3>Name</h3>
                 <h3>Phone Number</h3>
@@ -106,7 +104,7 @@ const Pacientes = () => {
                   </li>
                 );
               })}
-            </div>
+            </>
           ) : recents.length > 0 ? (
             <>
               <h3>Last Created by {user} </h3>
