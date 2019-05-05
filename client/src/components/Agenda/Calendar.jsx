@@ -111,7 +111,7 @@ const Calendar = () => {
         timeslots={2}
         min={new Date("2019, 1, 1, 08:00")}
         max={new Date("2019, 1, 1, 20:00")}
-        style={{ height: "100vh" }}
+        style={{ height: "72vh" }}
       />
       {openCreate ? (
         <div>
