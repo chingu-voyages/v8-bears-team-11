@@ -1,24 +1,21 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import firebase from "firebase/app";
 
 import "./Sidebar.scss";
 import variables from "../../../main.scss";
 
 const Sidebar = () => {
+  const logout = () => {
+    firebase.auth().signOut();
+  };
+
   return (
     <ul>
       <NavLink
         className="li"
         exact
         to="/"
-        activeStyle={{ color: variables.primary }}
-      >
-        <i className="material-icons">dashboard</i>
-        <span>Dashboard</span>
-      </NavLink>
-      <NavLink
-        className="li"
-        to="/agenda"
         activeStyle={{ color: variables.primary }}
       >
         <i className="material-icons">event</i>
@@ -32,39 +29,11 @@ const Sidebar = () => {
         <i className="material-icons">people</i>
         <span>Patients</span>
       </NavLink>
-      <NavLink
-        className="li"
-        to="/documentos"
-        activeStyle={{ color: variables.primary }}
-      >
-        <i className="material-icons">description</i>
-        <span>Documentos</span>
-      </NavLink>
-      <NavLink
-        className="li"
-        to="/farmacos"
-        activeStyle={{ color: variables.primary }}
-      >
-        <i className="material-icons">local_pharmacy</i>
-        <span>Fármacos</span>
-      </NavLink>
       <span className="spacer" />
-      <NavLink
-        className="li"
-        to="/config"
-        activeStyle={{ color: variables.primary }}
-      >
-        <i className="material-icons">settings</i>
-        <span>Configuración</span>
-      </NavLink>
-      <NavLink
-        className="li"
-        to="/req"
-        activeStyle={{ color: variables.primary }}
-      >
-        <i className="material-icons">assignment</i>
-        <span>Requerimientos</span>
-      </NavLink>
+      <div className="li" onClick={logout}>
+        <i className="material-icons">exit_to_app</i>
+        <span>Logout</span>
+      </div>
     </ul>
   );
 };
