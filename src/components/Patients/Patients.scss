@@ -1,0 +1,102 @@
+.pacientes {
+  .superior {
+    text-align: center;
+    h1 {
+      margin: 0;
+    }
+  }
+  .paperSearch {
+    padding: 10px 1em;
+    margin-top: 2em;
+    display: flex;
+    .searchInput {
+      input {
+        width: 10em;
+        transition: width 0.5s ease-in-out;
+      }
+      input:focus {
+        width: 20em;
+      }
+    }
+    .spacer {
+      flex: 1 1 auto;
+    }
+    .newPatientBtn {
+      padding: 0 2.5em;
+    }
+  }
+  .paperPatientsList {
+    min-height: 20em;
+    text-align: center;
+    margin: 2em auto;
+    display: flex;
+    ul {
+      margin: auto;
+      width: 100%;
+      padding: 1em;
+      :nth-child(2) {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+      :last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+      .gridHead {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        color: dimgray;
+      }
+      li {
+        list-style: none;
+        padding: 8px 0;
+        a.gridBody {
+          text-decoration: none;
+          display: grid;
+          margin: 0;
+          grid-template-columns: 1fr 1fr;
+          color: gray;
+        }
+      }
+      li:hover {
+        background-color: #964bf9;
+        * {
+          color: white;
+        }
+      }
+      .odd {
+        background-color: #46d0f73b;
+      }
+      .even {
+        background-color: ghostwhite;
+      }
+    }
+  }
+}
+.newPatientModal {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 10px 30px 30px 30px;
+  border-radius: 10px;
+  width: 40%;
+  .header {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    button {
+      margin: auto;
+    }
+  }
+  .pickers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align-last: center;
+    margin: 1em 0;
+    justify-items: center;
+    .timepicker {
+      width: 8em;
+    }
+    span {
+      color: gray;
+    }
+  }
+}
