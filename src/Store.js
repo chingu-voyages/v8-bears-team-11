@@ -20,6 +20,13 @@ const Store = ({ children }) => {
     });
   }, []);
 
+  fb.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      setUser(user.displayName);
+    } else {
+    }
+  });
+
   return (
     <UserContext.Provider value={[user, setUser]}>
       <PatientsContext.Provider value={[patients, setPatients]}>
