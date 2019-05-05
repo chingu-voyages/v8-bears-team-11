@@ -16,7 +16,6 @@ const Store = ({ children }) => {
         let pat = { ...patient.data(), uid: patient.id };
         myPatients.push(pat);
       });
-      console.log(myPatients);
       setPatients(myPatients);
     });
   }, []);
