@@ -77,9 +77,12 @@ const SignIn = () => {
           </Link>
         </form>
       </Card>
-      <p>
-        <strong> v8-bears-team-11 v1.0.1</strong>
-      </p>
+      <div>
+        <p>
+          <strong>v8-bears-team-11</strong>
+        </p>
+        <small>v1.0.2</small>
+      </div>
     </div>
   );
 };
