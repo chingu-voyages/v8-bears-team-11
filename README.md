@@ -1,2 +1,3 @@
-# v8-bears-team-11
-Add-project-description-here | Voyage-8 | https://chingu.io/
+# To install all packages run: npm install
+
+# To start client && server run: npm start

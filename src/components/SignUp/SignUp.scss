@@ -1,0 +1,107 @@
+.signup {
+  display: grid;
+  grid-template-rows: 1fr 10fr 1fr;
+  background-image: linear-gradient(
+    to bottom,
+    #46d0f7,
+    #50c9f7,
+    #5cc1f6,
+    #69baf3,
+    #76b2ef,
+    #6fa8f1,
+    #6c9df1,
+    #6e92f0,
+    #647ff4,
+    #656af4,
+    #6e50f0,
+    #7d2ae8
+  );
+  height: calc(100vh);
+  text-align: center;
+  h1 {
+    color: white;
+  }
+  .card {
+    margin: auto;
+    width: calc(6em + 40vmin);
+    height: calc(4em + 50vmin);
+    min-height: 25em;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    .cardheader {
+      text-align: center;
+      * {
+        color: lightgray;
+      }
+    }
+    form {
+      margin: auto 2em;
+      height: calc(100% - 63px);
+      display: flex;
+      flex-direction: column;
+      .emailinput {
+        margin: auto 0 0 0;
+        :-webkit-autofill,
+        :-webkit-autofill:hover,
+        :-webkit-autofill:focus {
+          -webkit-box-shadow: 0 0 0px 1000px #5b90c0 inset;
+        }
+        .MuiFormLabel-root-86.MuiFormLabel-focused-87 {
+          color: lightgray;
+        }
+      }
+      .passwordInput {
+        margin: auto 0 0 0;
+        :-webkit-autofill,
+        :-webkit-autofill:hover,
+        :-webkit-autofill:focus {
+          -webkit-box-shadow: 0 0 0px 1000px #5a89c0 inset;
+        }
+        .MuiFormLabel-root-86.MuiFormLabel-focused-87 {
+          color: lightgray;
+        }
+      }
+      .firstNameInput {
+        margin: auto 0 0 0;
+        :-webkit-autofill,
+        :-webkit-autofill:hover,
+        :-webkit-autofill:focus {
+          -webkit-box-shadow: 0 0 0px 1000px #5780c0 inset;
+        }
+        .MuiFormLabel-root-86.MuiFormLabel-focused-87 {
+          color: lightgray;
+        }
+      }
+      .lastNameInput {
+        margin: auto 0 0 0;
+        :-webkit-autofill,
+        :-webkit-autofill:hover,
+        :-webkit-autofill:focus {
+          -webkit-box-shadow: 0 0 0px 1000px #5780c0 inset;
+        }
+        .MuiFormLabel-root-86.MuiFormLabel-focused-87 {
+          color: lightgray;
+        }
+      }
+      .errormsg {
+        color: darkred;
+        text-align: center;
+      }
+      button {
+        margin: auto 0;
+      }
+      .linkto,
+      .linkto:visited {
+        text-decoration: none;
+        color: lightgray;
+        padding: 1em;
+        margin: 0 auto 1em auto;
+      }
+      .linkto:hover {
+        padding: 1em;
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
