@@ -1,5 +1,6 @@
 .patientProfile {
   h1 {
+    margin-top: 0;
     margin-left: 1em;
     color: dimgray;
     small,
@@ -11,11 +12,29 @@
       padding-left: 1em;
     }
   }
+  .gridAreasApp {
+    grid-template-areas:
+      "PD APP"
+      "CH  APP";
+  }
+  .gridAreas {
+    grid-template-areas: "PD CH";
+  }
   .superior {
     padding: 1em;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 2em;
+    .appointments {
+      grid-area: APP;
+    }
+    .personalData {
+      grid-area: PD;
+    }
+    .clinicalHistory {
+      grid-area: CH;
+    }
+    .consultation,
     .personalData,
     .clinicalHistory {
       .sectionHeader {
@@ -45,14 +64,17 @@
         background-clip: content-box, border-box;
         .content {
           padding: 1em;
-          display: flex;
-          flex-flow: wrap;
+          display: grid;
           > div {
             margin: 5px 1em;
           }
-          .selectGender {
-            width: 8em;
+          .telyemail,
+          .genydob {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1em;
           }
+
           .dob {
             input::-webkit-inner-spin-button {
               display: none;
@@ -69,28 +91,42 @@
         }
       }
     }
+    .appointments {
+      .tabsbar {
+        .MuiTabs-flexContainer-160 {
+          border-bottom: 1px solid lightgray;
+        }
+      }
+      .consultation {
+        margin: 2em auto;
+        .sectionContent {
+          .content {
+            display: grid;
+            .vitalsigns {
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+              grid-gap: 1em;
+            }
+            .row1,
+            .row2 {
+              display: grid;
+              grid-gap: 1em;
+              grid-template-columns: 1fr 1fr;
+            }
+          }
+        }
+      }
+    }
     .clinicalHistory {
       .sectionContent {
         .content {
           display: grid;
-          grid-template-rows: 1fr 1fr;
-          .row1 {
+          .row0 {
             display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
             grid-gap: 1em;
-            grid-template-columns: 1fr 2fr 2fr;
-            .left {
-              display: grid;
-              grid-template-rows: 1fr 1fr 1fr;
-              grid-gap: 1em;
-              > div {
-                margin: 0 auto;
-                max-width: 8em;
-              }
-            }
-            .area {
-              margin: auto 0;
-            }
           }
+          .row1,
           .row2 {
             display: grid;
             grid-gap: 1em;
@@ -98,6 +134,9 @@
           }
         }
       }
+    }
+    .appointments {
+      text-align: center;
     }
   }
   .MuiInputBase-root-72,

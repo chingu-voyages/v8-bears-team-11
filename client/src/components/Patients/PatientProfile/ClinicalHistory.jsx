@@ -45,75 +45,67 @@ function ClinicalHistory(props) {
       </div>
       <form className="sectionContent">
         <div className="content">
-          <div className="row1">
-            <div className="left">
-              <TextField
-                label="Weight"
-                variant="outlined"
-                disabled={disabledFlag ? true : false}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">Kg</InputAdornment>
-                  )
-                }}
-                value={patient.weight ? patient.weight : ""}
-                onChange={e =>
-                  setPatient({ ...patient, weight: e.target.value })
-                }
-              />
-              <TextField
-                label="Height"
-                variant="outlined"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">cms</InputAdornment>
-                  )
-                }}
-                disabled={disabledFlag ? true : false}
-                value={patient.height ? patient.height : ""}
-                onChange={e =>
-                  setPatient({ ...patient, height: e.target.value })
-                }
-              />
-              <FormControl
-                className="selectGender"
-                variant="outlined"
-                disabled={disabledFlag ? true : false}
-              >
-                <InputLabel htmlFor="bloodGroup">Blood Group</InputLabel>
-                <Select
-                  value={patient.bloodGroup ? patient.bloodGroup : ""}
-                  onChange={e =>
-                    setPatient({ ...patient, bloodGroup: e.target.value })
-                  }
-                  input={
-                    <OutlinedInput
-                      labelWidth={80}
-                      name="bloodGroup"
-                      id="bloodGroup"
-                    />
-                  }
-                >
-                  <MenuItem value="">
-                    <em>Unknown</em>
-                  </MenuItem>
-                  <MenuItem value="O-">O-</MenuItem>
-                  <MenuItem value="O+">O+</MenuItem>
-                  <MenuItem value="B-">B-</MenuItem>
-                  <MenuItem value="B+">B+</MenuItem>
-                  <MenuItem value="A-">A-</MenuItem>
-                  <MenuItem value="A+">B+</MenuItem>
-                  <MenuItem value="AB-">AB-</MenuItem>
-                  <MenuItem value="AB+">AB+</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
+          <div className="row0">
             <TextField
-              className="area"
+              label="Weight"
+              variant="outlined"
+              disabled={disabledFlag ? true : false}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">Kg</InputAdornment>
+              }}
+              value={patient.weight ? patient.weight : ""}
+              onChange={e => setPatient({ ...patient, weight: e.target.value })}
+            />
+            <TextField
+              label="Height"
+              variant="outlined"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">cms</InputAdornment>
+                )
+              }}
+              disabled={disabledFlag ? true : false}
+              value={patient.height ? patient.height : ""}
+              onChange={e => setPatient({ ...patient, height: e.target.value })}
+            />
+            <FormControl
+              variant="outlined"
+              disabled={disabledFlag ? true : false}
+            >
+              <InputLabel htmlFor="bloodGroup">Blood Group</InputLabel>
+              <Select
+                value={patient.bloodGroup ? patient.bloodGroup : ""}
+                onChange={e =>
+                  setPatient({ ...patient, bloodGroup: e.target.value })
+                }
+                input={
+                  <OutlinedInput
+                    labelWidth={80}
+                    name="bloodGroup"
+                    id="bloodGroup"
+                  />
+                }
+              >
+                <MenuItem value="">
+                  <em>Unknown</em>
+                </MenuItem>
+                <MenuItem value="O-">O-</MenuItem>
+                <MenuItem value="O+">O+</MenuItem>
+                <MenuItem value="B-">B-</MenuItem>
+                <MenuItem value="B+">B+</MenuItem>
+                <MenuItem value="A-">A-</MenuItem>
+                <MenuItem value="A+">B+</MenuItem>
+                <MenuItem value="AB-">AB-</MenuItem>
+                <MenuItem value="AB+">AB+</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <div className="row1">
+            <TextField
               label="Allergies"
               variant="outlined"
               multiline
-              rows="8"
+              rows="4"
               disabled={disabledFlag ? true : false}
               value={patient.allergies ? patient.allergies : ""}
               onChange={e =>
@@ -121,11 +113,10 @@ function ClinicalHistory(props) {
               }
             />
             <TextField
-              className="area"
               label="Medications"
               variant="outlined"
               multiline
-              rows="8"
+              rows="4"
               disabled={disabledFlag ? true : false}
               value={patient.medications ? patient.medications : ""}
               onChange={e =>
@@ -138,7 +129,7 @@ function ClinicalHistory(props) {
               label="Congenital disorders"
               variant="outlined"
               multiline
-              rows="6"
+              rows="4"
               disabled={disabledFlag ? true : false}
               value={patient.disorders ? patient.disorders : ""}
               onChange={e =>
@@ -149,7 +140,7 @@ function ClinicalHistory(props) {
               label="Notes"
               variant="outlined"
               multiline
-              rows="6"
+              rows="4"
               disabled={disabledFlag ? true : false}
               value={patient.notes ? patient.notes : ""}
               onChange={e => setPatient({ ...patient, notes: e.target.value })}

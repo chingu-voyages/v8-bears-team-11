@@ -71,66 +71,71 @@ function PersonalData(props) {
       </div>
       <form className="sectionContent">
         <div className="content">
-          <TextField
-            label="Telephone"
-            variant="outlined"
-            disabled={disabledFlag ? true : false}
-            value={patient.tel ? patient.tel : ""}
-            onChange={e => setPatient({ ...patient, tel: e.target.value })}
-          />
-          <TextField
-            label="Email"
-            variant="outlined"
-            disabled={disabledFlag ? true : false}
-            value={patient.email ? patient.email : ""}
-            onChange={e => setPatient({ ...patient, email: e.target.value })}
-          />
+          <div className="telyemail">
+            <TextField
+              label="Telephone"
+              variant="outlined"
+              disabled={disabledFlag ? true : false}
+              value={patient.tel ? patient.tel : ""}
+              onChange={e => setPatient({ ...patient, tel: e.target.value })}
+            />
+            <TextField
+              label="Email"
+              variant="outlined"
+              disabled={disabledFlag ? true : false}
+              value={patient.email ? patient.email : ""}
+              onChange={e => setPatient({ ...patient, email: e.target.value })}
+            />
+          </div>
           <TextField
             className="address"
             label="Address"
             variant="outlined"
-            fullWidth
             multiline
             rows="3"
             disabled={disabledFlag ? true : false}
             value={patient.address ? patient.address : ""}
             onChange={e => setPatient({ ...patient, address: e.target.value })}
           />
-          <FormControl
-            className="selectGender"
-            variant="outlined"
-            disabled={disabledFlag ? true : false}
-          >
-            <InputLabel htmlFor="gender">Gender</InputLabel>
-            <Select
-              value={patient.gender ? patient.gender : ""}
-              onChange={e => setPatient({ ...patient, gender: e.target.value })}
-              input={
-                <OutlinedInput labelWidth={50} name="gender" id="gender" />
-              }
+          <div className="genydob">
+            <FormControl
+              className="selectGender"
+              variant="outlined"
+              disabled={disabledFlag ? true : false}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="Female">Female</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </Select>
-          </FormControl>
-          <TextField
-            className="dob"
-            label="Birthday"
-            variant="outlined"
-            disabled={disabledFlag ? true : false}
-            type="date"
-            defaultValue={patient.dob ? renderDate() : ""}
-            InputLabelProps={{
-              shrink: true
-            }}
-            onChange={e => {
-              setMyDate(e.target.value);
-            }}
-          />
+              <InputLabel htmlFor="gender">Gender</InputLabel>
+              <Select
+                value={patient.gender ? patient.gender : ""}
+                onChange={e =>
+                  setPatient({ ...patient, gender: e.target.value })
+                }
+                input={
+                  <OutlinedInput labelWidth={50} name="gender" id="gender" />
+                }
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              className="dob"
+              label="Birthday"
+              variant="outlined"
+              disabled={disabledFlag ? true : false}
+              type="date"
+              defaultValue={patient.dob ? renderDate() : ""}
+              InputLabelProps={{
+                shrink: true
+              }}
+              onChange={e => {
+                setMyDate(e.target.value);
+              }}
+            />
+          </div>
         </div>
       </form>
     </>
