@@ -2,9 +2,11 @@
   "name": "v8-bears-team-11",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://chingu-voyages.github.io/v8-bears-team-11",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "firebase": "^5.10.1",
+    "gh-pages": "^2.0.1",
     "material-ui-time-picker": "^1.1.0",
     "moment": "^2.24.0",
     "node-sass": "^4.10.0",
@@ -17,6 +19,8 @@
     "react-swipeable-views": "^0.13.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
