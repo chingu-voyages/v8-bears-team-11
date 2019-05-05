@@ -34,7 +34,7 @@
       margin: auto;
       width: 100%;
       padding: 1em;
-      :first-child {
+      :nth-child(2) {
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
       }
@@ -45,8 +45,7 @@
       .gridHead {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        background-color: #46d0f7;
-        color: ghostwhite;
+        color: dimgray;
       }
       li {
         list-style: none;
@@ -100,8 +99,4 @@
       color: gray;
     }
   }
-}
-
-.patientProfile {
-  padding: 2em;
 }

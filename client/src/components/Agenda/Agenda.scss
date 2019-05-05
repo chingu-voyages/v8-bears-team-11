@@ -1,8 +1,11 @@
 .agenda {
   text-align: center;
+  h1 {
+    margin-top: 0;
+  }
   .calendar {
-    width: 80vw;
-    margin: auto auto 5em auto;
+    width: 70vw;
+    margin: auto;
     background-color: white;
     padding: 2em;
     border-radius: 10px;
