@@ -11,8 +11,8 @@ A platform where users can create patients, add basic clinical / personal inform
 ## Tech Stack
 
 - React
-- React Hooks
-- Firebase
+- React Hooks (useState, useEffect, useContext)
+- Firebase (Firebase Auth, Firestore)
 
 ## Features
 
@@ -21,6 +21,7 @@ A platform where users can create patients, add basic clinical / personal inform
 - CRUD appoinments in calendar
 - Drag and Drop appoinments in calendar
 - Draggable modals
+- Global storage with hooks
 
 ## Todo
 
