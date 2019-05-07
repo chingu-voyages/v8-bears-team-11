@@ -21,7 +21,7 @@ A platform where users can create patients, add basic clinical / personal inform
 - CRUD appoinments in calendar
 - Drag and Drop appoinments in calendar
 - Draggable modals
-- Global storage with hooks
+- Global state with react hooks
 
 ## Todo
 
